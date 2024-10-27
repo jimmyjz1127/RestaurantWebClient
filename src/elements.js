@@ -1,3 +1,14 @@
+/**
+ * Contains functions for creating HTML elements in javacript 
+ */
+
+/**
+ * Function for creating (nested) HTML elements using javascript
+ * @param {*} name              : the name of the html element (e.g. 'div', 'p', 'img')
+ * @param {*} options           : object containing attributes of html element (e.g. {className="main", id='id1'})
+ * @param  {...any} children    : child html elements (nested called of this function)
+ * @returns                     : HTML dom element 
+ */
 function element(name, options = {}, ...children) {
     // Create a new document element
     // name = div | span | h1 | etc...

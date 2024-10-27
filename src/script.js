@@ -17,7 +17,7 @@ function loadItems(filter) {
                 return;
             }
         } else if (filter != null && filter.name != null) {
-            if (menuItem.name.toLowerCase().includes(filter.name.toLowerCase())) {
+            if (!menuItem.name.toLowerCase().includes(filter.name.toLowerCase())) {
                 return;
             }
         }
@@ -57,5 +57,20 @@ function loadItems(filter) {
 
 loadItems();
 
+
+function handleSearch(){
+    let searchInput = document.getElementById('search-input');
+    let query = searchInput.value;
+
+    if (query.length != 0) {
+        loadItems({name:`${query}`});
+    } else {
+        loadItems();
+    }
+    
+    // searchInput.value="";
+}
+
+window.handleSearch = handleSearch;
 window.loadItems = loadItems;
 
