@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <link rel="stylesheet" href="styles.css"/>
+        <link rel="stylesheet" href="presets.css"/>
+        <script type="module" src="menu.js"></script>
+        <script type="module" src="script.js" defer></script>
+        <script type="module" src="elements.js"></script>
+    </head>
+    <body>
+        <div id="page-wrapper" class="flex row align-start">
+            <div id="sidebar" class="flex col align-start">
+                <div id="title-container" class="flex row align-center">
+                    <img src="Assets/chompify.png" id="chompify-logo"/>
+                    <h1 id="title">Chompify</h1>
+                </div>
+                <div id="catergory-wrapper" class="flex col align-start">
+                    <div class="flex row align-center justify-start sidebar-item">
+                        <img src="./Assets/appetizer-icon.png" class="sidebar-icon"/>
+                        <h3>Appetizers</h3>
+                    </div>
+                    <div class="flex row align-center justify-start sidebar-item">
+                        <img src="./Assets/taco-icon.png" class="sidebar-icon"/>
+                        <h3>Tacos</h3>
+                    </div>
+                    <div class="flex row align-center justify-start sidebar-item">
+                        <img src="./Assets/burrito-icon.png" class="sidebar-icon"/>
+                        <h3>Burritos</h3>
+                    </div>
+                    <div class="flex row align-center justify-start sidebar-item">
+                        <img src="./Assets/main.png" class="sidebar-icon"/>
+                        <h3>Mains</h3>
+                    </div>
+                    <div class="flex row align-center justify-start sidebar-item">
+                        <img src="./Assets/dessert-icon.png" class="sidebar-icon"/>
+                        <h3>Desserts</h3>
+                    </div>
+                    <div class="flex row align-center justify-start sidebar-item">
+                        <img src="./Assets/drink-icon.png" class="sidebar-icon"/>
+                        <h3>Drinks</h3>
+                    </div>
+                    <div class="flex row align-center justify-start sidebar-item">
+                        <img src="./Assets/sauce-icon.png" class="sidebar-icon"/>
+                        <h3>Sides</h3>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <div id="middle-content" class="flex col align-center">
+                <div id="search-container" class="flex row align-center justify-between">
+                    <div id="search-input-container" class="flex row align-center">
+                        <img src="Assets/search.png" id="search-icon"/>
+                        <input type="text" id="search-input" placeholder="Search a dish or category..."/>
+                    </div>
+                    <button id="search-btn">Search</button>
+                </div>
+
+                <div id="main-content" class="flex col align-center">
+                </div>
+
+            </div>
+
+            <div id="cart" class="flex col align-center">
+                
+            </div>
+
+        </div>
+    </body>
+</html>
