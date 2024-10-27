@@ -16,31 +16,35 @@
                     <h1 id="title">Chompify</h1>
                 </div>
                 <div id="catergory-wrapper" class="flex col align-start">
-                    <div class="flex row align-center justify-start sidebar-item">
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems()">
+                        <img src="./Assets/menu.png" class="sidebar-icon"/>
+                        <h3>All</h3>
+                    </div>
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Appetizer'})">
                         <img src="./Assets/appetizer-icon.png" class="sidebar-icon"/>
                         <h3>Appetizers</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item">
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Taco'})">
                         <img src="./Assets/taco-icon.png" class="sidebar-icon"/>
                         <h3>Tacos</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item">
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Burrito'})">
                         <img src="./Assets/burrito-icon.png" class="sidebar-icon"/>
                         <h3>Burritos</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item">
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Main'})">
                         <img src="./Assets/main.png" class="sidebar-icon"/>
                         <h3>Mains</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item">
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Dessert'})">
                         <img src="./Assets/dessert-icon.png" class="sidebar-icon"/>
                         <h3>Desserts</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item">
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Drink'})">
                         <img src="./Assets/drink-icon.png" class="sidebar-icon"/>
                         <h3>Drinks</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item">
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Side'})">
                         <img src="./Assets/sauce-icon.png" class="sidebar-icon"/>
                         <h3>Sides</h3>
                     </div>
