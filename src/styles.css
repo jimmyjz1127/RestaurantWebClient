@@ -18,7 +18,7 @@ button{
 
 button:hover {
     cursor:pointer;
-    filter:brightness(0.95);
+    filter:brightness(0.93);
 }
 
 input:hover{
@@ -146,6 +146,8 @@ input:hover{
     height:100%;
     width: 100%;
     overflow-y:scroll;
+
+    position:relative;
 }
 
 .food-item{
@@ -205,9 +207,81 @@ input:hover{
 
 .food-item-price{
     font-weight:600;
-    margin-right:2%;
+    margin-right:10%;
 }
 
+.food-item-category {
+    font-weight:600;
+}
+
+.food-item-category-icon{
+    height:20px;
+    margin-right:3px;
+}
+
+/* Menu Item Checkout Modal */
+#item-checkout {
+    position:absolute;
+    top:0px;
+
+    width:50%;
+    /* height:90%; */
+    height:fit-content;
+
+    background-color:white;
+    border-radius:var(--border-radius);
+    box-shadow: 1px 3px 5px 5px rgba(0,0,0,0.1);
+}
+
+#exit-icon-container{
+    position:absolute;
+    left:6px;
+    top:6px;
+    height:20px;
+    width:20px;
+    background-color: rgb(241, 241, 241);
+    filter: opacity(0.7);
+    z-index:10;
+    border-radius: 5px;
+}
+
+#exit-icon {
+    height:20px;
+}
+
+#exit-icon:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+#item-checkout-img {
+    width:100%;
+    border-top-right-radius: var(--border-radius);
+    border-top-left-radius: var(--border-radius);
+}
+
+#item-checkout-description {
+    color : var(--dark-grey);
+    text-align: center;
+    padding-bottom : 10px;
+    border-bottom : 2px solid var(--dark-grey);
+}
+
+#checkbox-container{
+    min-width:60%;
+}
+
+#item-checkout-bottom { 
+    width:90%;
+    margin-top:10%;
+    background-color: rgb(236, 236, 236);
+    padding-top:2%;
+    padding-bottom:2%;
+    padding-right:5%;
+    padding-left:5%;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
 
 /* Cart Styling */
 
@@ -216,7 +290,24 @@ input:hover{
     height:100vh;
 
     z-index: 100;
-
     box-shadow: -7px 0px 8px -6px rgba(0,0,0,0.1);
+}
+
+#cart-header-container {
+    font-size:2em;
+    font-weight:600;
+    width:90%;
+    margin-top:10px;
+    padding-bottom:5px;
+    border-bottom:2px solid gray;
+    color:var(--dark-grey);
+}
+
+.cart-quantity {
+    background-color: var(--purple-theme);
+    padding:0px 3px 0px 3px;
+    border-radius:var(--border-radius);
+    color:white;
+    margin-left:2px;
 }
 

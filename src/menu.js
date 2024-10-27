@@ -1,6 +1,7 @@
 const menuItems = [
     {
-      name: "Nachos",
+      id:1,
+      name: "Veggie Nachos",
       price: 699, // 6.99 GBP
       category: "Appetizer",
       description:
@@ -13,6 +14,7 @@ const menuItems = [
       img:'./Assets/food_images/nachos.jpg'
     },
     {
+      id:2,
       name: "Free Range Chicken & Avocado Tacos",
       price: 449, // 4.49 GBP
       category: "Taco",
@@ -26,6 +28,7 @@ const menuItems = [
       img:'./Assets/food_images/chicken_tacos.jpg'
     },
     {
+        id:3,
         name: "Grassfed Beef Tacos",
         price: 449, // 4.49 GBP
         category: "Taco",
@@ -39,6 +42,7 @@ const menuItems = [
         img:'./Assets/food_images/beef-taco.jpg'
     },
     {
+        id:4,
         name: "Hot Carnitas Tacos",
         price: 399, // 3.99 GBP
         category: "Taco",
@@ -52,6 +56,7 @@ const menuItems = [
         img:'./Assets/food_images/carnitas-taco.jpg'
     },
     {
+        id:5,
         name: "Birria Tacos",
         price: 399, // 3.99 GBP
         category: "Taco",
@@ -65,6 +70,7 @@ const menuItems = [
         img:'./Assets/food_images/birria_tacos.jpg'
     },
     {
+        id:6,
         name: "Shrimp Tacos",
         price: 399, // 3.99 GBP
         category: "Taco",
@@ -78,6 +84,7 @@ const menuItems = [
         img:'./Assets/food_images/shrimp_tacos.jpg'
     },
     {
+      id:7,
       name: "Ancho Mushroom Tacos",
       price: 399, // 3.99 GBP
       category: "Taco",
@@ -91,6 +98,7 @@ const menuItems = [
       img:"./Assets/food_images/mushroom-taco.png"
     },
     {
+      id:8,
       name: "Sustainable Battered Fish Tacos",
       price: 549, // 5.49 GBP
       category: "Taco",
@@ -104,6 +112,7 @@ const menuItems = [
       img:"./Assets/food_images/fish_taco.png"
     },
     {
+      id:9,
       name: "Black Bean & Three Cheeses Quesadillas",
       price: 499, // 4.99 GBP
       category: "Quesadilla",
@@ -117,6 +126,7 @@ const menuItems = [
       img:"./Assets/food_images/quesadilla.jpg"
     },
     {
+      id:10,
       name: "Horchata",
       price: 249, // 2.49 GBP
       category: "Drink",
@@ -129,6 +139,7 @@ const menuItems = [
       img:'./Assets/food_images/horchata.jpg'
     },
     {
+        id:11,
         name: "Tres Leches Cake",
         price: 549, // 2.49 GBP
         category: "Dessert",
@@ -141,6 +152,7 @@ const menuItems = [
         img:'./Assets/food_images/tresleches.jpg'
       },
       {
+        id:12,
         name: "Tomato Salsa",
         price: 249, // 2.49 GBP
         category: "Side",
@@ -153,6 +165,7 @@ const menuItems = [
         img:'./Assets/food_images/tomatosalsa.jpg'
       },
       {
+        id:13,
         name: "Guacamole",
         price: 249, // 2.49 GBP
         category: "Side",
@@ -164,6 +177,7 @@ const menuItems = [
         img:'./Assets/food_images/guac.jpg'
       },
       {
+        id:14,
         name: "Mandarin Jarritos Soda",
         price: 249, // 2.49 GBP
         category: "Drink",
@@ -174,6 +188,7 @@ const menuItems = [
         img:'./Assets/food_images/jarritos.jpg'
       },
       {
+        id:15,
         name: "Beef Burrito",
         price: 849, // 2.49 GBP
         category: "Burrito",
@@ -185,7 +200,8 @@ const menuItems = [
         ],
         img:'./Assets/food_images/beef_burrito.jpg'
       },
-      {
+      { 
+        id:16,
         name: "Chicken Burrito",
         price: 849, // 2.49 GBP
         category: "Burrito",
@@ -198,6 +214,7 @@ const menuItems = [
         img:'./Assets/food_images/chicken_burrito.jpg'
       },
       {
+        id:17,
         name: "Choriza Burrito",
         price: 849, // 2.49 GBP
         category: "Burrito",

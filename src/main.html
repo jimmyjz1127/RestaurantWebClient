@@ -32,6 +32,10 @@
                         <img src="./Assets/burrito-icon.png" class="sidebar-icon"/>
                         <h3>Burritos</h3>
                     </div>
+                    <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Quesadilla'})">
+                        <img src="./Assets/quesadilla-icon.png" class="sidebar-icon"/>
+                        <h3>Quesadilla</h3>
+                    </div>
                     <div class="flex row align-center justify-start sidebar-item" onclick="loadItems({category:'Main'})">
                         <img src="./Assets/main.png" class="sidebar-icon"/>
                         <h3>Mains</h3>
@@ -60,6 +64,7 @@
                         <input type="text" id="search-input" placeholder="Search a dish or category..."/>
                     </div>
                     <button id="search-btn" onclick="handleSearch()">Search</button>
+                    <!-- Implement sorting drop down -->
                 </div>
 
                 <div id="main-content" class="flex col align-center">
@@ -68,7 +73,10 @@
             </div>
 
             <div id="cart" class="flex col align-center">
-                
+                <div id="cart-header-container" class="flex row justify-center"></div>
+                <div id="cart-content" class="flex col align-start">
+                    
+                </div>
             </div>
 
         </div>
