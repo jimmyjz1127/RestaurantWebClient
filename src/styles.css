@@ -397,14 +397,10 @@ input:hover{
     margin-top:1em;
 }
 
-
 #discount-input{
     margin-left:5px;
-
     border:none;
-
     background-color:rgb(230, 230, 230);
-
     border-radius : 0.5em;
     padding:0.5em 0em 0.5em 1em;
     width:100%;
@@ -414,10 +410,29 @@ input:hover{
 #apply-btn {
     background-color:var(--dark-grey);
     color : white;
-    padding : 0.5em 3em 0.5em 3em;
+    padding : 0.5em 0em 0.5em 0em;
+    width:90%;
     border-radius : 0.5em;
     font-weight:600;
     margin-bottom:1em;
 }
 
+#place-order-btn{
+    width:80%;
+    padding:1em 2em 1em 2em;
+
+    border-radius: 0.5em;
+
+    margin-bottom:3em;
+
+    font-weight:600;
+
+    font-size:1.2rem;
+    background-color : var(--purple-theme);
+    color:white;
+}
+
+#cart-summary-values {
+    margin-left:10px;
+}
 

@@ -199,7 +199,7 @@ function handleAddItem(event, id) {
  */
 function handleCheck(price) {
     let checkoutPrice = document.getElementById('checkout-item-price');
-    checkoutPrice.innerHTML = '£' + parseFloat(parseFloat(checkoutPrice.innerHTML.slice(1)) + price)
+    checkoutPrice.innerHTML = '£' + (parseFloat(parseFloat(checkoutPrice.innerHTML.slice(1)) + price)).toFixed(2);
 }
 
 var shoppingCart = [];
@@ -321,11 +321,10 @@ function changeQuantity(index, amount, id) {
  * For updating the shopping cart summary with appropriate Subtotal, Discount, and Total values 
  */
 function updateCartSummary() {
-
     if (shoppingCart.length == 0) {
-        document.getElementById('subtotal').innerHTML = 0;
-        document.getElementById('discount').innerHTML = 0;
-        document.getElementById('total').innerHTML = 0;
+        document.getElementById('subtotal').innerHTML = `£${0}`;
+        document.getElementById('discount').innerHTML = `£${0}`;
+        document.getElementById('total').innerHTML = `£${0}`;
     }
 
     total = 0;
@@ -333,16 +332,14 @@ function updateCartSummary() {
         total += item.totalPrice;
     })
 
-    document.getElementById('subtotal').innerHTML = total;
+    document.getElementById('subtotal').innerHTML = `£${total}`;
 
     if (discountApplied) {
-        document.getElementById('discount').innerHTML = total * 0.1;
-        document.getElementById('total').innerHTML = total * 0.9;
+        document.getElementById('discount').innerHTML = `£${(total * 0.1).toFixed(2)}`;
+        document.getElementById('total').innerHTML = `£${(total * 0.9).toFixed(2)}`;
     } else {
-        document.getElementById('total').innerHTML = total;
+        document.getElementById('total').innerHTML = `£${total}`;
     }
-
-
 }
 
 /**
@@ -383,26 +380,14 @@ function handleSearch(){
 }
 
 
+function handleApplyDiscount() {
+    let discountCode = document.getElementById('discount-input').value;
 
-/**
- * 
- * @param {*} quantity 
- */
-function renderCartHeader(quantity) {
-    let cartHeader = document.getElementById('cart-header-container');
+    if (discountCode == "TACO10") {
+        discountApplied=true;
+    }
 
-    let cartHeaderLabel = element('div',
-        {className:'cart-label'},
-        'Cart'
-    )
-
-    let cartHeaderQuantity = element('div',
-        {className:'cart-quantity'},
-        `${quantity}`
-    )
-
-    cartHeader.appendChild(cartHeaderLabel);
-    cartHeader.appendChild(cartHeaderQuantity);
+    updateCartSummary();
 }
 
 
@@ -415,11 +400,12 @@ renderCartHeader(shoppingCart.length);
 
 
 
-window.handleSearch = handleSearch;
-window.loadItems = loadItems;
-window.handleAddItem = handleAddItem;
-window.handleCloseModal = handleCloseModal;
-window.handleCheck = handleCheck;
-window.handleAddToCart = handleAddToCart;
-window.changeQuantity = changeQuantity;
-window.updateCartSummary = updateCartSummary;
+window.handleSearch        = handleSearch;
+window.loadItems           = loadItems;
+window.handleAddItem       = handleAddItem;
+window.handleCloseModal    = handleCloseModal;
+window.handleCheck         = handleCheck;
+window.handleAddToCart     = handleAddToCart;
+window.changeQuantity      = changeQuantity;
+window.updateCartSummary   = updateCartSummary;
+window.handleApplyDiscount = handleApplyDiscount;
