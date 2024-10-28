@@ -61,9 +61,9 @@
                 <div id="search-container" class="flex row align-center justify-between">
                     <div id="search-input-container" class="flex row align-center">
                         <img src="Assets/search.png" id="search-icon"/>
-                        <input type="text" id="search-input" placeholder="Search a dish or category..."/>
+                        <input type="text" id="search-input" placeholder="Search a dish or category..." oninput="handleSearch(event)"/>
                     </div>
-                    <button id="search-btn" onclick="handleSearch()">Search</button>
+                    <button id="search-btn" onclick="handleSearch(event)">Search</button>
                     <!-- Implement sorting drop down -->
                 </div>
 

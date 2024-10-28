@@ -368,7 +368,8 @@ function handleCloseModal() {
 /**
  * 
  */
-function handleSearch(){
+function handleSearch(event){
+
     let searchInput = document.getElementById('search-input');
     let query = searchInput.value;
 
