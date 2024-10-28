@@ -74,10 +74,24 @@
 
             <div id="cart" class="flex col align-center">
                 <div id="cart-header-container" class="flex row justify-center"></div>
-                <div id="cart-content" class="flex col align-start">
-                    
+                <div id="cart-content" class="flex col align-start"></div>
+                <div id="cart-summary" class="flex row align-start max-width">
+                    <div class="flex col align-start justify-start">
+                        <input type="text" placeholder="e.g. x93kjscv" id="discount-input"/>
+                        <div>Subtotal</div>
+                        <div>Discount</div>
+                        <div>Total</div>
+                    </div>
+                    <div class="flex col align-end justify-start" id="subtotal-container">
+                        <button id="apply-btn">APPLY</button>
+                        <div id="subtotal">0</div>
+                        <div id="discount">0</div>
+                        <div id="total">0</div>
+                    </div>
+
                 </div>
             </div>
+
 
         </div>
     </body>

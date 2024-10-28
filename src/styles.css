@@ -10,6 +10,10 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    height:100vh;
+    width:100vw;
+    position:fixed;
+    top:-0.5rem;
 }
 
 button{
@@ -43,8 +47,8 @@ input:hover{
 
 
 #page-wrapper{
-    width:100vw;
-    height:100vh;
+    width:100%;
+    height:100%;
 }
 
 /* Sidebar Styling */
@@ -89,6 +93,9 @@ input:hover{
     width:75%;
     height:100vh;
     background-color: var(--offwhite);
+    margin-top:0px;
+
+    position:relative;
 }
 
 #search-container {
@@ -147,7 +154,7 @@ input:hover{
     width: 100%;
     overflow-y:scroll;
 
-    position:relative;
+    /* position:relative; */
 }
 
 .food-item{
@@ -222,15 +229,17 @@ input:hover{
 /* Menu Item Checkout Modal */
 #item-checkout {
     position:absolute;
-    top:0px;
+    top:10%;
 
-    width:50%;
-    /* height:90%; */
+    width:40%;
+    /* height:80%; */
     height:fit-content;
+    max-height:80%;
 
     background-color:white;
     border-radius:var(--border-radius);
     box-shadow: 1px 3px 5px 5px rgba(0,0,0,0.1);
+    padding-bottom:1%;
 }
 
 #exit-icon-container{
@@ -256,8 +265,23 @@ input:hover{
 
 #item-checkout-img {
     width:100%;
+    height:50%;
+    object-fit:cover;
     border-top-right-radius: var(--border-radius);
     border-top-left-radius: var(--border-radius);
+}
+
+#item-checkout-info{
+    height:50%;
+    padding:1rem;
+    width:90%;
+}
+
+#item-checkout-title {
+    font-size:1.7rem;
+    text-align:center;
+    font-weight:600;
+    margin-bottom:10px;
 }
 
 #item-checkout-description {
@@ -267,20 +291,27 @@ input:hover{
     border-bottom : 2px solid var(--dark-grey);
 }
 
+#checkbox-container-wrapper {
+    width:100%;
+    margin-bottom:1rem;
+}
+
 #checkbox-container{
     min-width:60%;
 }
+.checkbox-item {
+    margin-right:1rem;
+}
 
 #item-checkout-bottom { 
-    width:90%;
-    margin-top:10%;
-    background-color: rgb(236, 236, 236);
+    width:100%;
     padding-top:2%;
-    padding-bottom:2%;
-    padding-right:5%;
-    padding-left:5%;
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
+}
+
+#item-checkout-bottom > .food-item-price {
+    margin-right:1em;
 }
 
 /* Cart Styling */
@@ -296,6 +327,7 @@ input:hover{
 #cart-header-container {
     font-size:2em;
     font-weight:600;
+    height:5%;
     width:90%;
     margin-top:10px;
     padding-bottom:5px;
@@ -310,4 +342,82 @@ input:hover{
     color:white;
     margin-left:2px;
 }
+
+#cart-content { 
+    height:70%;
+    width:90%;
+    overflow-y:scroll;
+}
+
+.cart-item{
+    width:100%;
+    border-bottom:1px solid gray;
+    padding-bottom:1em;
+}
+
+.cart-item-addons {
+    font-size:0.8rem;
+    color : gray;
+    margin-bottom:5px;
+}
+
+.cart-price {
+    color:gray;
+}
+
+.quantity-toggle-container {
+    width:25%;
+}
+
+.cart-item-quantity {
+    margin : 4px;
+    border:1px solid var(--dark-grey);
+    padding : 1px 5px 1px 5px;
+}
+
+.quantity-btn {
+    padding : 3px 7px 3px 7px;
+    font-weight:600;
+}
+
+#cart-summary {
+    padding-top:10px;
+    height:25%;
+    width:80%;
+    border-top:1px solid var(--dark-grey);
+}
+
+#cart-summary > div {
+    width:50%;
+    height:100%;
+    font-weight:600;
+}
+
+#cart-summary > div > div {
+    margin-top:1em;
+}
+
+
+#discount-input{
+    margin-left:5px;
+
+    border:none;
+
+    background-color:rgb(230, 230, 230);
+
+    border-radius : 0.5em;
+    padding:0.5em 0em 0.5em 1em;
+    width:100%;
+    margin-bottom:1em;
+}
+
+#apply-btn {
+    background-color:var(--dark-grey);
+    color : white;
+    padding : 0.5em 3em 0.5em 3em;
+    border-radius : 0.5em;
+    font-weight:600;
+    margin-bottom:1em;
+}
+
 

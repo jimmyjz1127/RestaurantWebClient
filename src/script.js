@@ -99,6 +99,11 @@ function loadItems(filter) {
     })
 }
 
+/**
+ * 
+ * @param {*} event 
+ * @param {*} id 
+ */
 function handleAddItem(event, id) {
     let mainContent = document.getElementById('main-content');
 
@@ -115,6 +120,41 @@ function handleAddItem(event, id) {
     })
 
     let menuItem = menuItems[id-1];
+
+    // Conditionally determine whether to render add-ons (extras) section 
+    // Depending on whether there are add-ons 
+    let menuItemExtras = menuItem.extras.length ? 
+        element('div',
+            { className: 'flex col align-center', id: 'checkbox-container-wrapper' },
+            element('h3', {}, 'Add-Ons'),
+            element('div',
+                { id: 'checkbox-container', className: 'flex row align-start justify-between' },
+                element('div',
+                    { className: 'flex col align-start' },
+                    ...menuItem.extras.map((item, index) => {
+                        return element('div',
+                            { className: 'checkbox-item flex row align-center' },
+                            element('input', 
+                                { 
+                                    type    : "checkbox", 
+                                    id      : `checkbox${index}`, 
+                                    value   : `${item.name}`,
+                                    className : 'addon-checkbox',
+                                    onClick : `handleCheck(${item.price/100})`
+                                }
+                            ),
+                            element('label', { for: `checkbox${index}` }, item.name)
+                        );
+                    })
+                ),
+                element('div',
+                    { className: 'flex col align-end' },
+                    ...menuItem.extras.map((item, index) => {
+                        return element('div', {}, `£${item.price / 100}`);
+                    })
+                )
+            )
+        ) : element('div', {});
     
     let itemCheckout = element('div',
         {id:'item-checkout', className:'flex col align-center'},
@@ -122,80 +162,214 @@ function handleAddItem(event, id) {
             {id:'exit-icon-container', onClick:"handleCloseModal()"},
             element('img',
                 {src:'./Assets/exit.png', id:'exit-icon'}
-            )
+            ), 
         ),
         element('img',
             {src:menuItem.img, id:'item-checkout-img'}
         ),
         element('div',
-            {class:'flex col align-center'},
-            element('h2',{},menuItem.name),
+            {className:'flex col align-center justify-center', id:'item-checkout-info'},
+            element('div',{className:'center-text', id:'item-checkout-title'},menuItem.name),
             element('div',
                 {className:'flex col align-center', id:"item-checkout-description"},
                 menuItem.description
             ),
-            element('h3',{}, 'Add-Ons'),
-            element('div',
-                {id:'checkbox-container', className:'flex row align-start justify-between'},
-                element('div',
-                    {className:'flex col align-start'},
-                    ...menuItem.extras.map((item,index) => {
-                        return element('div',
-                            {className:'checkbox-item flex row align-center'},
-                            element('input',
-                                {type:"checkbox",id:`checkbox${index}`}
-                            ),
-                            element('label',
-                                {for:`checkbox${index}`},
-                                item.name
-                            )
-                        )
-                    })
-                ),
-                element('div',
-                    {className:'flex col align-end'},
-                    ...menuItem.extras.map((item,index) => {
-                        return element('div',{},`£${item.price}`)
-                    })
-                )
-            ),
+            menuItemExtras,
             element('div', 
-                {className:'flex row align-center justify-between', id:'item-checkbout-bottom'},
+                {className:'flex row justify-end align-center', id:'item-checkout-bottom'},
                 element('div',
-                    {className:'food-item-price'},
-                    `£${menuItem.price}`
+                    {className:'food-item-price', id:'checkout-item-price'},
+                    `£${menuItem.price / 100}`
                 ),
                 element('button',
-                    {className:'food-item-add-btn'},
+                    {className:'food-item-add-btn', onClick:`handleAddToCart(${id-1})`},
                     "Add"
                 )
-            )
+            ),
         )
     )
-
     mainContent.appendChild(itemCheckout);
 
 }
 
+/**
+ * Handles action of checking Add-On checkbox 
+ * Updates the displayed price to reflect addition of add-on price
+ * @param {*} price : price of the add-on
+ */
+function handleCheck(price) {
+    let checkoutPrice = document.getElementById('checkout-item-price');
+    checkoutPrice.innerHTML = '£' + parseFloat(parseFloat(checkoutPrice.innerHTML.slice(1)) + price)
+}
 
+var shoppingCart = [];
+var discountApplied = false;
+
+/**
+ * Handles clicking the 'ADD' button in the floating checkout modal
+ */
+function handleAddToCart(index) {
+    let price = parseFloat((document.getElementById('checkout-item-price').innerHTML).slice(1));
+    let menuItem = menuItems[index];
+    let checkboxes = document.querySelectorAll('.addon-checkbox');
+    let addons = [];
+
+    checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+            addons.push(checkbox.value);
+        }
+    })
+
+    let cartItem = {
+        id:index,
+        name:menuItem.name,
+        description:menuItem.description,
+        price:price,
+        category:menuItem.category,
+        addons:addons,
+        quantity:1,
+        totalPrice:price
+    }
+
+    shoppingCart.push(cartItem)
+
+    renderCart();
+    handleCloseModal();
+    updateCartSummary();
+}
+
+
+function renderCart() {
+    let parent = document.getElementById('cart-content');
+
+    parent.innerHTML = "";
+
+    shoppingCart.forEach((item, index) => {
+        let cartItem = element('div',
+            {className:'cart-item flex col align-start', id:`cart-item${index}`},
+            element('div',
+                {className:'flex row align-center justify-start'},
+                element('h3', {}, item.name)
+            ),
+            element('div',
+                {className:'flex row align-center justify-apart cart-item-addons'},
+                `Add-Ons : ` + item.addons.join(", ")
+            ),
+            element('div', 
+                {className:'flex row align-center justify-between max-width'},
+                element('div',
+                    {className:'cart-price', id:`cart-price${index}`},
+                    `£${item.totalPrice}`
+                ),
+                element('div',
+                    {className:'quantity-toggle-container flex row align-center'},
+                    element('button',
+                        {
+                            className:'quantity-btn flex col align-center justify-center',
+                            onClick:`changeQuantity(${index}, ${1}, 'cart-item${index}')`
+                        },
+                        '+'
+                    ),
+                    element('div',
+                        {className:'cart-item-quantity', id:`quantity${index}`},
+                        `${item.quantity}` // CHANGE!!! 
+                    ),
+                    element('button',
+                        {
+                            className:'quantity-btn flex col align-center justify-center',
+                            onClick:`changeQuantity(${index}, ${-1}, 'cart-item${index}')`
+                        },
+                        '-'
+                    )
+                )
+            )
+        )
+
+        parent.appendChild(cartItem);
+
+    })
+}
+
+/**
+ * 
+ * @param {*} index 
+ * @param {*} amount 
+ * @param {*} id 
+ */
+function changeQuantity(index, amount, id) {
+    if (shoppingCart[index].quantity + amount <= 0) {
+        document.getElementById(id).remove();
+        shoppingCart.splice(index,1);
+        updateCartSummary();
+        return
+    }
+
+    shoppingCart[index].quantity += amount;
+
+    shoppingCart[index].totalPrice =  shoppingCart[index].price *  shoppingCart[index].quantity;
+
+    let itemQuantity = document.getElementById(`quantity${index}`);
+    itemQuantity.innerHTML = shoppingCart[index].quantity;
+
+    let itemPrice = document.getElementById(`cart-price${index}`);
+    itemPrice.innerHTML = `£${shoppingCart[index].totalPrice}`;
+
+    updateCartSummary();
+}
+
+/**
+ * For updating the shopping cart summary with appropriate Subtotal, Discount, and Total values 
+ */
+function updateCartSummary() {
+
+    if (shoppingCart.length == 0) {
+        document.getElementById('subtotal').innerHTML = 0;
+        document.getElementById('discount').innerHTML = 0;
+        document.getElementById('total').innerHTML = 0;
+    }
+
+    total = 0;
+    shoppingCart.forEach((item) => {
+        total += item.totalPrice;
+    })
+
+    document.getElementById('subtotal').innerHTML = total;
+
+    if (discountApplied) {
+        document.getElementById('discount').innerHTML = total * 0.1;
+        document.getElementById('total').innerHTML = total * 0.9;
+    } else {
+        document.getElementById('total').innerHTML = total;
+    }
+
+
+}
+
+/**
+ * Handles closing the checkout modal (when clicking the X button)
+ */
 function handleCloseModal() {
     let itemCheckoutModal = document.getElementById('item-checkout');
     itemCheckoutModal.remove();
 
     let foodItems = document.querySelectorAll('.food-item');
 
+    // Unblur the food item tiles 
     foodItems.forEach((foodItem) => {
         foodItem.style.filter="unset";
     })
 
     let addBtns = document.querySelectorAll('.food-item-add-btn')
 
+    // enable the ADD buttons on each of the food item tiles 
     addBtns.forEach((addBtn) => {
         addBtn.disabled = false;
     })
-
 }
 
+/**
+ * 
+ */
 function handleSearch(){
     let searchInput = document.getElementById('search-input');
     let query = searchInput.value;
@@ -208,8 +382,12 @@ function handleSearch(){
     }
 }
 
-var shoppingCart = [];
 
+
+/**
+ * 
+ * @param {*} quantity 
+ */
 function renderCartHeader(quantity) {
     let cartHeader = document.getElementById('cart-header-container');
 
@@ -241,3 +419,7 @@ window.handleSearch = handleSearch;
 window.loadItems = loadItems;
 window.handleAddItem = handleAddItem;
 window.handleCloseModal = handleCloseModal;
+window.handleCheck = handleCheck;
+window.handleAddToCart = handleAddToCart;
+window.changeQuantity = changeQuantity;
+window.updateCartSummary = updateCartSummary;
