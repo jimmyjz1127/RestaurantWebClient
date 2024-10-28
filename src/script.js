@@ -83,11 +83,12 @@ function loadItems(filter) {
                         {className:'flex row align-center'},
                         element("div", 
                             {className:"food-item-price"},
-                            "£" + menuItem.price/100
+                            "£" + (menuItem.price/100).toFixed(2)
                         ),
                         element("button",
-                            {className:"food-item-add-btn",
-                             onClick:`handleAddItem(event, ${itemId})`   
+                            {
+                                className:"food-item-add-btn",
+                                onClick:`handleAddItem(event, '${itemId}')`   
                             },
                             "ADD"
                         )
@@ -150,7 +151,7 @@ function handleAddItem(event, id) {
                 element('div',
                     { className: 'flex col align-end' },
                     ...menuItem.extras.map((item, index) => {
-                        return element('div', {}, `£${item.price / 100}`);
+                        return element('div', {}, `£${(item.price / 100).toFixed(2)}`);
                     })
                 )
             )
@@ -179,7 +180,7 @@ function handleAddItem(event, id) {
                 {className:'flex row justify-end align-center', id:'item-checkout-bottom'},
                 element('div',
                     {className:'food-item-price', id:'checkout-item-price'},
-                    `£${menuItem.price / 100}`
+                    `£${(menuItem.price / 100).toFixed(2)}`
                 ),
                 element('button',
                     {className:'food-item-add-btn', onClick:`handleAddToCart(${id-1})`},
@@ -259,7 +260,7 @@ function renderCart() {
                 {className:'flex row align-center justify-between max-width'},
                 element('div',
                     {className:'cart-price', id:`cart-price${index}`},
-                    `£${item.totalPrice}`
+                    `£${item.totalPrice.toFixed(2)}`
                 ),
                 element('div',
                     {className:'quantity-toggle-container flex row align-center'},
@@ -312,7 +313,7 @@ function changeQuantity(index, amount, id) {
     itemQuantity.innerHTML = shoppingCart[index].quantity;
 
     let itemPrice = document.getElementById(`cart-price${index}`);
-    itemPrice.innerHTML = `£${shoppingCart[index].totalPrice}`;
+    itemPrice.innerHTML = `£${shoppingCart[index].totalPrice.toFixed(2)}`;
 
     updateCartSummary();
 }
@@ -332,13 +333,13 @@ function updateCartSummary() {
         total += item.totalPrice;
     })
 
-    document.getElementById('subtotal').innerHTML = `£${total}`;
+    document.getElementById('subtotal').innerHTML = `£${total.toFixed(2)}`;
 
     if (discountApplied) {
         document.getElementById('discount').innerHTML = `£${(total * 0.1).toFixed(2)}`;
         document.getElementById('total').innerHTML = `£${(total * 0.9).toFixed(2)}`;
     } else {
-        document.getElementById('total').innerHTML = `£${total}`;
+        document.getElementById('total').innerHTML = `£${(total.toFixed(2))}`;
     }
 }
 
@@ -392,13 +393,7 @@ function handleApplyDiscount() {
 
 
 
-
-
-
 loadItems(); // render items when script is loaded
-renderCartHeader(shoppingCart.length);
-
-
 
 window.handleSearch        = handleSearch;
 window.loadItems           = loadItems;
