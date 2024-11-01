@@ -1,6 +1,9 @@
 import menuItems from './menu.js';
 import element from './elements.js';
 
+var shoppingCart = [];
+var discountApplied = false;
+
 /**
  * Mapping of category names to their icon paths
  */
@@ -33,24 +36,18 @@ function loadItems(filter) {
         /**
          * Conditionals for implementing filtering
          */
-        // if filtering by search bar (where one can search for both category & item name)
-        if (filter != null && filter.category != null && filter.name != null) {
-            if (menuItem.category.toLowerCase() != filter.category.toLowerCase() && !menuItem.name.toLowerCase().includes(filter.name.toLowerCase())) {
-                return;
-            }
-        } 
-        // if filtering just by category
-        else if (filter != null && filter.category != null) {
-            if (menuItem.category.toLowerCase() != filter.category.toLowerCase()) {
-                return;
-            }
-        } 
-        // if filtering just by item name (not really needed - covered by first conditional)
-        else if (filter != null && filter.name != null) {
-            if (!menuItem.name.toLowerCase().includes(filter.name.toLowerCase())) {
-                return;
+        if (filter != null) {
+            for (let key in filter) {
+                if (key == 'favourite' && (menuItem[key] == null || menuItem[key] != filter[key])) {
+                    return;
+                }
+                else if (key != 'favourite' && menuItem[key] != null && !menuItem[key].includes(`${filter[key]}`)) {
+                    return;
+                }
             }
         }
+
+        let favouriteIcon = menuItem.favourite != null & menuItem.favourite ? './Assets/favourited.svg' : './Assets/favourite.svg';
 
         let itemId = menuItem.id;
     
@@ -59,6 +56,14 @@ function loadItems(filter) {
             {className:'food-item flex row align-center', id:`${itemId}`},
             element("img", 
                 {src:menuItem.img, className:'food-pic'}
+            ),
+            element('img', 
+                {
+                    id:`favourite${itemId}`,
+                    className:'favourite-btn flex row align-center justify-center',
+                    src:favouriteIcon,
+                    onClick:`handleFavourite(${itemId})`
+                }
             ),
             element("div",
                 {className:'flex col align-start justify-between food-item-info'},
@@ -98,6 +103,27 @@ function loadItems(filter) {
         ) // end of outer most div
         mainContent.appendChild(foodItem);
     })
+}
+
+/**
+ * 
+ * @param {*} itemId 
+ */
+function handleFavourite(itemId) {
+    let menuItem = menuItems[itemId - 1];
+
+    if (menuItem.favourite != null) {
+        if (menuItem.favourite) {
+            document.getElementById(`favourite${itemId}`).src='./Assets/favourite.svg';
+        } else {
+            document.getElementById(`favourite${itemId}`).src='./Assets/favourited.svg';
+        }
+        menuItem.favourite = !menuItem.favourite;
+        
+    } else {
+        menuItem.favourite = true;
+        document.getElementById(`favourite${itemId}`).src='./Assets/favourited.svg';
+    }
 }
 
 /**
@@ -190,7 +216,35 @@ function handleAddItem(event, id) {
         )
     )
     mainContent.appendChild(itemCheckout);
+}
 
+/**
+ * For handling the sorting of menu items
+ * @param option : integer 1,2,3, or 4 indicating what to sort by 
+ */
+function handleSort(option) {
+    switch (option) {
+        case 1: // Price high to low 
+            menuItems.sort((a,b) => a.price - b.price)
+            break;
+        case 2: // Price low to high 
+            menuItems.sort((a,b) => b.price - a.price)
+            break;
+        case 3: // Category high to low 
+            menuItems.sort((a,b) => {
+                if (a.category > b.category) {return 1}
+                else return -1
+            })
+            break;
+        case 4: // Category low to high 
+            menuItems.sort((a,b) => {
+                if (a.category > b.category) {return -1}
+                else return 1
+            })
+            break;
+    }
+
+    loadItems();
 }
 
 /**
@@ -203,8 +257,7 @@ function handleCheck(price) {
     checkoutPrice.innerHTML = '£' + (parseFloat(parseFloat(checkoutPrice.innerHTML.slice(1)) + price)).toFixed(2);
 }
 
-var shoppingCart = [];
-var discountApplied = false;
+
 
 /**
  * Handles clicking the 'ADD' button in the floating checkout modal
@@ -283,19 +336,17 @@ function renderCart() {
                         '-'
                     )
                 )
-            )
-        )
-
+            ) // end of price and add btn
+        ) // end of Cart Item
         parent.appendChild(cartItem);
-
     })
 }
 
 /**
- * 
- * @param {*} index 
- * @param {*} amount 
- * @param {*} id 
+ * For changing the quantity of an order item in the "Order Details" section
+ * @param {*} index  : the index of the item in the shopping cart array
+ * @param {*} amount : +1 or -1 
+ * @param {*} id     : the id of tne HTML element representing the order item 
  */
 function changeQuantity(index, amount, id) {
     if (shoppingCart[index].quantity + amount <= 0) {
@@ -366,9 +417,9 @@ function handleCloseModal() {
 }
 
 /**
- * 
+ * Handles searching a query using search bar 
  */
-function handleSearch(event){
+function handleSearch(){
 
     let searchInput = document.getElementById('search-input');
     let query = searchInput.value;
@@ -381,7 +432,9 @@ function handleSearch(event){
     }
 }
 
-
+/**
+ * Applies a given discount code to the final order price
+ */
 function handleApplyDiscount() {
     let discountCode = document.getElementById('discount-input').value;
 
@@ -405,3 +458,5 @@ window.handleAddToCart     = handleAddToCart;
 window.changeQuantity      = changeQuantity;
 window.updateCartSummary   = updateCartSummary;
 window.handleApplyDiscount = handleApplyDiscount;
+window.handleSort          = handleSort;
+window.handleFavourite     = handleFavourite;

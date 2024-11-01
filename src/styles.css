@@ -20,12 +20,12 @@ button{
     border : none;
 }
 
-button:hover {
+button:hover, select:hover {
     cursor:pointer;
     filter:brightness(0.93);
 }
 
-input:hover{
+input:hover, select:hover{
     cursor:pointer;
 }
 
@@ -34,15 +34,13 @@ input:hover{
 }
 
 #title {
-    padding:5px;
-    margin:5px;
-    margin-right:8px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color:var(--purple-theme);
+    font-size:2vw;
 }
 
 #chompify-logo{
-    height:90%;
+    width:5vw;
 }
 
 
@@ -51,8 +49,9 @@ input:hover{
     height:100%;
 }
 
-/* Sidebar Styling */
-
+/* ############################*/
+/* ###### Sidebar Styling #####*/
+/* ############################*/
 #sidebar {
     width:25%;
     height:100vh;
@@ -83,18 +82,18 @@ input:hover{
 
 .sidebar-icon {
     height:30px;
-    margin-right:5px;
+    margin-right:1em;
 }
 
 
-/* main content styling */
+/* ############################*/
+/* ## Middle Content Styling ##*/
+/* ############################ */
 
 #middle-content {
     width:75%;
     height:100vh;
     background-color: var(--offwhite);
-    margin-top:0px;
-
     position:relative;
 }
 
@@ -105,18 +104,23 @@ input:hover{
     border-radius: var(--border-radius);
     box-shadow: 1px 3px 5px 5px rgba(0,0,0,0.1);
 
-    margin-top:10px;
+    margin-top:1rem;
     margin-bottom:2%;
-    padding:1em;
+    padding:1rem;
+}
+
+#search-container > * {
+    margin-left: 0.5em;
+    margin-right:0.5em;
 }
 
 #search-input-container{
-    width:80%;
+    width:70%;
     height:80%;
     background-color: var(--search-background-color);
     padding-left:15px;
     border-radius: var(--border-radius);
-
+    font-weight:400;
 }
 
 #search-icon {
@@ -140,21 +144,27 @@ input:hover{
     color:var(--purple-theme);
     border:2px solid var(--purple-theme);
 
-    width:17%;
+    width:20%;
     border-radius: var(--border-radius);
     font-weight: 600;
 
     padding:10px 10px 10px 10px;
 }
 
-/* Main Content Styling */
+#sorting-dropdown {
+    padding:10px 10px 10px 10px;
+    border-radius: var(--border-radius);
+    border:none;
+}
+
+/* ############################*/
+/* ### Main Content Styling ###*/
+/* ############################*/
 
 #main-content {
     height:100%;
     width: 100%;
     overflow-y:scroll;
-
-    /* position:relative; */
 }
 
 .food-item{
@@ -165,8 +175,18 @@ input:hover{
     box-shadow: 1px 3px 5px 5px rgba(0,0,0,0.1);
     border-radius:var(--border-radius);
 
-    padding:10px;
-    margin-bottom:10px;
+    padding:1em;
+    margin-bottom:1rem;
+
+    position:relative;
+}
+
+.favourite-btn {
+    position:absolute;
+    width:1.5em;
+    right:1em;
+    top:1em;
+    z-index:100;
 }
 
 .food-item:hover{
@@ -201,7 +221,7 @@ input:hover{
 .food-item-description {
     color:gray;
     font-size: 0.9em;
-    margin-top : 5px;
+    margin-top : 0.5em;
 }
 
 .food-item-add-btn {
@@ -223,10 +243,13 @@ input:hover{
 
 .food-item-category-icon{
     height:20px;
-    margin-right:3px;
+    margin-right:0.3em;
 }
 
-/* Menu Item Checkout Modal */
+/* ############################*/
+/* # Menu Item Checkout Modal #*/
+/* ############################*/
+
 #item-checkout {
     position:absolute;
     top:10%;
@@ -281,7 +304,7 @@ input:hover{
     font-size:1.7rem;
     text-align:center;
     font-weight:600;
-    margin-bottom:10px;
+    margin-bottom:0.5em;
 }
 
 #item-checkout-description {
@@ -314,7 +337,10 @@ input:hover{
     margin-right:1em;
 }
 
-/* Cart Styling */
+/* ################################*/
+/* ######### Cart Styling #########*/
+/* ################################*/
+
 
 #cart {
     width:25%;
@@ -325,22 +351,14 @@ input:hover{
 }
 
 #cart-header-container {
-    font-size:2em;
+    font-size:1.7vw;
     font-weight:600;
     height:5%;
     width:90%;
-    margin-top:10px;
+    margin-top:1em;
     padding-bottom:5px;
-    border-bottom:2px solid gray;
+    border-bottom:3px solid gray;
     color:var(--dark-grey);
-}
-
-.cart-quantity {
-    background-color: var(--purple-theme);
-    padding:0px 3px 0px 3px;
-    border-radius:var(--border-radius);
-    color:white;
-    margin-left:2px;
 }
 
 #cart-content { 
@@ -353,12 +371,13 @@ input:hover{
     width:100%;
     border-bottom:1px solid gray;
     padding-bottom:1em;
+    position:relative;
 }
 
 .cart-item-addons {
     font-size:0.8rem;
     color : gray;
-    margin-bottom:5px;
+    margin-bottom:0.5em;
 }
 
 .cart-price {
@@ -370,7 +389,7 @@ input:hover{
 }
 
 .cart-item-quantity {
-    margin : 4px;
+    margin : 0.3em;
     border:1px solid var(--dark-grey);
     padding : 1px 5px 1px 5px;
 }
@@ -381,10 +400,10 @@ input:hover{
 }
 
 #cart-summary {
-    padding-top:10px;
+    padding-top:1em;
     height:25%;
     width:80%;
-    border-top:1px solid var(--dark-grey);
+    border-top:3px solid var(--dark-grey);
 }
 
 #cart-summary > div {
@@ -398,7 +417,7 @@ input:hover{
 }
 
 #discount-input{
-    margin-left:5px;
+    margin-left:0.5em;
     border:none;
     background-color:rgb(230, 230, 230);
     border-radius : 0.5em;
@@ -433,6 +452,7 @@ input:hover{
 }
 
 #cart-summary-values {
-    margin-left:10px;
+    margin-left:1em;
+    width:20%;
 }
 
