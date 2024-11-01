@@ -1,8 +1,9 @@
 import menuItems from './menu.js';
 import element from './elements.js';
 
-var shoppingCart = [];
-var discountApplied = false;
+let shoppingCart = [];          // shopping cart of menu item objects
+let discountApplied = false;    // boolean for whether discount code has been applied 
+let filter = null;              // filter obj for filtering menu items 
 
 /**
  * Mapping of category names to their icon paths
@@ -19,13 +20,24 @@ const categoryIcons = {
 }
 
 
+/**
+ * Applies filter to menu items shown 
+ * @param {*} obj : filter object. E.g : {category : 'Appetizer', name:'Veggie Nachos'}
+ */
+function applyFilter(obj) {
+    document.getElementById('sorting-dropdown').selectedIndex = 0; // reset sorting dropdown
+    filter = obj; // set the filter
+    loadItems();  // reload (render) items
+}
+
+
 
 /**
  * Renders content belt of menu items
  * @param {*} filter : object specifying what to filter by and the value
  *                     Example : {category:'Taco'} or {name:'Birria Tacos'}
  */
-function loadItems(filter) {
+function loadItems() {
     let mainContent = document.getElementById('main-content');
 
     // Reset menu item content belt
@@ -36,17 +48,14 @@ function loadItems(filter) {
         /**
          * Conditionals for implementing filtering
          */
-        if (filter != null) {
-            for (let key in filter) {
-                if (key == 'favourite' && (menuItem[key] == null || menuItem[key] != filter[key])) {
-                    return;
-                }
-                else if (key != 'favourite' && menuItem[key] != null && !menuItem[key].includes(`${filter[key]}`)) {
-                    return;
-                }
-            }
+        if (filter && !Object.keys(filter).some(key =>
+            (key === 'favourite' && menuItem[key] === filter[key]) ||
+            (key !== 'favourite' && menuItem[key]?.toLowerCase().includes(filter[key].toLowerCase()))
+        )) {
+            return;
         }
 
+        // Determine whether heart (favourite) icon should be filled in or not in the food item tile 
         let favouriteIcon = menuItem.favourite != null & menuItem.favourite ? './Assets/favourited.svg' : './Assets/favourite.svg';
 
         let itemId = menuItem.id;
@@ -106,23 +115,24 @@ function loadItems(filter) {
 }
 
 /**
- * 
- * @param {*} itemId 
+ * Handles favouriting an item (clicking on heart icon)
+ * @param {*} itemId : ID the of the menu food item
  */
 function handleFavourite(itemId) {
     let menuItem = menuItems[itemId - 1];
+    let favouriteIcon = document.getElementById(`favourite${itemId}`);
 
     if (menuItem.favourite != null) {
         if (menuItem.favourite) {
-            document.getElementById(`favourite${itemId}`).src='./Assets/favourite.svg';
+           favouriteIcon.src='./Assets/favourite.svg';
         } else {
-            document.getElementById(`favourite${itemId}`).src='./Assets/favourited.svg';
+            favouriteIcon.src='./Assets/favourited.svg';
         }
         menuItem.favourite = !menuItem.favourite;
         
     } else {
         menuItem.favourite = true;
-        document.getElementById(`favourite${itemId}`).src='./Assets/favourited.svg';
+        favouriteIcon.src='./Assets/favourited.svg';
     }
 }
 
@@ -136,6 +146,9 @@ function handleAddItem(event, id) {
 
     let foodItems = document.querySelectorAll('.food-item');
 
+    /**
+     * Blur and deactivate other food tiles to prevent opening multiple checkout modals
+     */
     foodItems.forEach((foodItem) => {
         foodItem.style.filter="blur(5px)";
     })
@@ -223,7 +236,8 @@ function handleAddItem(event, id) {
  * @param option : integer 1,2,3, or 4 indicating what to sort by 
  */
 function handleSort(option) {
-    switch (option) {
+    
+    switch (parseInt(option)) {
         case 1: // Price high to low 
             menuItems.sort((a,b) => a.price - b.price)
             break;
@@ -426,9 +440,9 @@ function handleSearch(){
 
     // if query is not empty, apply filter
     if (query.length != 0) {
-        loadItems({category:`${query}`, name:`${query}`});
+        applyFilter({category:`${query}`, name:`${query}`});
     } else { // otherwise reset filter
-        loadItems();
+        applyFilter();
     }
 }
 
@@ -446,9 +460,9 @@ function handleApplyDiscount() {
 }
 
 
-
 loadItems(); // render items when script is loaded
 
+// expose functions to html
 window.handleSearch        = handleSearch;
 window.loadItems           = loadItems;
 window.handleAddItem       = handleAddItem;
@@ -460,3 +474,4 @@ window.updateCartSummary   = updateCartSummary;
 window.handleApplyDiscount = handleApplyDiscount;
 window.handleSort          = handleSort;
 window.handleFavourite     = handleFavourite;
+window.applyFilter         = applyFilter;
