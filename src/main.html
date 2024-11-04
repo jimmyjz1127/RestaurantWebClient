@@ -8,6 +8,7 @@
 
         <link rel="stylesheet" href="styles.css"/>
         <link rel="stylesheet" href="presets.css"/>
+        <link rel="stylesheet" href="mediaqueries.css"/>
         <script type="module" src="menu.js"></script>
         <script type="module" src="script.js" defer></script>
         <script type="module" src="elements.js"></script>
@@ -90,15 +91,19 @@
             <div id="cart" class="flex col align-center">
                 <div id="cart-header-container" class="flex row justify-center">Order Details</div>
                 <div id="cart-content" class="flex col align-start"></div>
+                <div class="flex row align-center justify-between" id="discount-section">
+                    <input type="text" placeholder="e.g. x93kjscv" id="discount-input" value=""/>
+                    <button id="apply-btn" onclick="handleApplyDiscount()">APPLY</button>
+                </div>
+                <div id="discount-error-message">Invalid Discount Code!</div>
+                <div id="discount-applied-message">Discount Applied!</div>
                 <div id="cart-summary" class="flex row align-start max-width">
                     <div class="flex col align-start justify-start">
-                        <input type="text" placeholder="e.g. x93kjscv" id="discount-input" value=""/>
                         <div>Subtotal</div>
                         <div>Discount</div>
                         <div>Total</div>
                     </div>
                     <div class="flex col align-end justify-start" id="cart-summary-values">
-                        <button id="apply-btn" onclick="handleApplyDiscount()">APPLY</button>
                         <div id="subtotal">£0</div>
                         <div id="discount">£0</div>
                         <div id="total">£0</div>

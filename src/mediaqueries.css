@@ -1,0 +1,39 @@
+@media (max-width : 1350px) {
+    .food-item-title {
+        font-size : 1.25em;
+    }
+
+    #cart-header-container {
+        font-size:1.5em;
+    }
+
+    #place-order-btn {
+        font-size : 1em;
+    }
+}
+
+@media (max-width : 850px) {
+    .category-label {
+        font-size : 2vw;
+    }
+
+    .food-item-description {
+        font-size:0.75em;
+    }
+
+    .food-item-title {
+        font-size : 1em;
+    }
+
+    #place-order-btn {
+        font-size:1em;
+    }
+
+    #cart-header-container {
+        font-size:1.15em;
+    }
+
+    .sidebar-icon {
+        height:2em;
+    }
+}

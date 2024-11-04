@@ -137,7 +137,7 @@ function handleFavourite(itemId) {
 }
 
 /**
- * 
+ * Handles clicking the ADD button on a menu food item tile.
  * @param {*} event 
  * @param {*} id 
  */
@@ -196,6 +196,7 @@ function handleAddItem(event, id) {
             )
         ) : element('div', {});
     
+    // Checkout modal
     let itemCheckout = element('div',
         {id:'item-checkout', className:'flex col align-center'},
         element('div',
@@ -223,7 +224,7 @@ function handleAddItem(event, id) {
                 ),
                 element('button',
                     {className:'food-item-add-btn', onClick:`handleAddToCart(${id-1})`},
-                    "Add"
+                    "Add to Order"
                 )
             ),
         )
@@ -306,7 +307,9 @@ function handleAddToCart(index) {
     updateCartSummary();
 }
 
-
+/**
+ * Renders all of the food items in the right-hand cart panel that are currently in the shopping cart.
+ */
 function renderCart() {
     let parent = document.getElementById('cart-content');
 
@@ -317,7 +320,7 @@ function renderCart() {
             {className:'cart-item flex col align-start', id:`cart-item${index}`},
             element('div',
                 {className:'flex row align-center justify-start'},
-                element('h3', {}, item.name)
+                element('h3', {className:'cart-item-title'}, item.name)
             ),
             element('div',
                 {className:'flex row align-center justify-apart cart-item-addons'},
@@ -340,7 +343,7 @@ function renderCart() {
                     ),
                     element('div',
                         {className:'cart-item-quantity', id:`quantity${index}`},
-                        `${item.quantity}` // CHANGE!!! 
+                        `${item.quantity}`
                     ),
                     element('button',
                         {
@@ -454,6 +457,11 @@ function handleApplyDiscount() {
 
     if (discountCode == "TACO10") {
         discountApplied=true;
+        document.getElementById('discount-error-message').style.display = 'none';
+        document.getElementById('discount-applied-message').style.display = 'block';
+    } else {
+        document.getElementById('discount-error-message').style.display = 'block';
+        document.getElementById('discount-applied-message').style.display = 'none';
     }
 
     updateCartSummary();

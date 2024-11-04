@@ -226,6 +226,57 @@ const menuItems = [
         ],
         img:'./Assets/food_images/chorizo_burrito.jpg'
       },
+      {
+        id:18,
+        name: "Chile Relleno",
+        price: 1249, // 2.49 GBP
+        category: "Main",
+        description:
+          "Poblano pepper stuffed with cheese, minced beef and eggs.",
+        extras: [
+          { name: "Extra Cheese", price: 125 }, // 0.25 GBP
+          { name: "Large Size", price: 399 }, // 0.99 GBP
+        ],
+        img:'./Assets/food_images/chilerelleno.jpg'
+      },
+      {
+        id:19,
+        name: "Pork Tamales",
+        price: 1149, // 2.49 GBP
+        category: "Main",
+        description:
+          "Corn tamale stuffed with queso fresco, chillies, and pulled pork.",
+        extras: [
+          { name: "Extra Pork", price: 125 }, // 0.25 GBP
+          { name: "Large Size", price: 399 }, // 0.99 GBP
+        ],
+        img:'./Assets/food_images/tamale.jpg'
+      },
+      {
+        id:20,
+        name: "Huevos Rancheros",
+        price: 1149, // 2.49 GBP
+        category: "Main",
+        description:
+          "Fried free-range eggs on lightly fried corn flour tortillas, topped with spicy salsa, fresh tomatos, chillies and onion.",
+        extras: [
+          { name: "Add Pork", price: 225 }, // 0.25 GBP
+          { name: "Large Size", price: 399 }, // 0.99 GBP
+        ],
+        img:'./Assets/food_images/huevosrancheros.jpg'
+      },
+      {
+        id:21,
+        name: "Chips & Guacamole",
+        price: 549, // 2.49 GBP
+        category: "Appetizer",
+        description:
+          "Corn tortilla chips with freshly made guacamole.",
+        extras: [
+          { name: "Large Size", price: 299 }, // 0.99 GBP
+        ],
+        img:'./Assets/food_images/chipsandguac.jpg'
+      }
   ];
   
 
