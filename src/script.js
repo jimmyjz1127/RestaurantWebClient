@@ -1,3 +1,4 @@
+"use strict";
 import menuItems from './menu.js';
 import element from './elements.js';
 
@@ -29,7 +30,6 @@ function applyFilter(obj) {
     filter = obj; // set the filter
     loadItems();  // reload (render) items
 }
-
 
 
 /**
@@ -104,7 +104,7 @@ function loadItems() {
                                 className:"food-item-add-btn",
                                 onClick:`handleAddItem(event, '${itemId}')`   
                             },
-                            "ADD"
+                            "Add"
                         )
                     ),
                 ) // end food item content div (desc, price, etc )
@@ -199,12 +199,9 @@ function handleAddItem(event, id) {
     // Checkout modal
     let itemCheckout = element('div',
         {id:'item-checkout', className:'flex col align-center'},
-        element('div',
-            {id:'exit-icon-container', onClick:"handleCloseModal()"},
-            element('img',
-                {src:'./Assets/exit.png', id:'exit-icon'}
-            ), 
-        ),
+        element('img',
+            {src:'./Assets/exit.png', id:'exit-icon', onClick:"handleCloseModal()"}
+        ), 
         element('img',
             {src:menuItem.img, id:'item-checkout-img'}
         ),
@@ -467,8 +464,10 @@ function handleApplyDiscount() {
     updateCartSummary();
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    loadItems(); // render items when script is loaded
+})
 
-loadItems(); // render items when script is loaded
 
 // expose functions to html
 window.handleSearch        = handleSearch;
