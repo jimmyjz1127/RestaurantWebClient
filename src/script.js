@@ -71,7 +71,7 @@ function loadItems() {
                     id:`favourite${itemId}`,
                     className:'favourite-btn flex row align-center justify-center',
                     src:favouriteIcon,
-                    onClick:`handleFavourite(${itemId})`
+                    index:itemId
                 }
             ),
             element("div",
@@ -102,7 +102,7 @@ function loadItems() {
                         element("button",
                             {
                                 className:"food-item-add-btn",
-                                onClick:`handleAddItem(event, '${itemId}')`   
+                                value:`${itemId}`,
                             },
                             "Add"
                         )
@@ -178,9 +178,9 @@ function handleAddItem(event, id) {
                                 { 
                                     type    : "checkbox", 
                                     id      : `checkbox${index}`, 
-                                    value   : `${item.name}`,
+                                    name   : `${item.name}`,
                                     className : 'addon-checkbox',
-                                    onClick : `handleCheck(${item.price/100})`
+                                    value : `${item.price/100}`,
                                 }
                             ),
                             element('label', { for: `checkbox${index}` }, item.name)
@@ -200,7 +200,7 @@ function handleAddItem(event, id) {
     let itemCheckout = element('div',
         {id:'item-checkout', className:'flex col align-center'},
         element('img',
-            {src:'./Assets/exit.png', id:'exit-icon', onClick:"handleCloseModal()"}
+            {src:'./Assets/exit.png', id:'exit-icon'}
         ), 
         element('img',
             {src:menuItem.img, id:'item-checkout-img'}
@@ -220,7 +220,7 @@ function handleAddItem(event, id) {
                     `£${(menuItem.price / 100).toFixed(2)}`
                 ),
                 element('button',
-                    {className:'food-item-add-btn', onClick:`handleAddToCart(${id-1})`},
+                    {id:'food-item-checkout-btn', value:`${id-1}`},
                     "Add to Order"
                 )
             ),
@@ -264,9 +264,14 @@ function handleSort(option) {
  * Updates the displayed price to reflect addition of add-on price
  * @param {*} price : price of the add-on
  */
-function handleCheck(price) {
+function handleCheck(event, price) {
     let checkoutPrice = document.getElementById('checkout-item-price');
-    checkoutPrice.innerHTML = '£' + (parseFloat(parseFloat(checkoutPrice.innerHTML.slice(1)) + price)).toFixed(2);
+    if (event.target.checked) {
+        checkoutPrice.innerHTML = '£' + (parseFloat(parseFloat(checkoutPrice.innerHTML.slice(1)) + parseFloat(price))).toFixed(2);
+    } else {
+        checkoutPrice.innerHTML = '£' + (parseFloat(parseFloat(checkoutPrice.innerHTML.slice(1)) - parseFloat(price))).toFixed(2);
+    }
+    
 }
 
 
@@ -282,7 +287,7 @@ function handleAddToCart(index) {
 
     checkboxes.forEach((checkbox) => {
         if (checkbox.checked) {
-            addons.push(checkbox.value);
+            addons.push(checkbox.name);
         }
     })
 
@@ -334,7 +339,8 @@ function renderCart() {
                     element('button',
                         {
                             className:'quantity-btn flex col align-center justify-center',
-                            onClick:`changeQuantity(${index}, ${1}, 'cart-item${index}')`
+                            index:index,
+                            value:1,
                         },
                         '+'
                     ),
@@ -345,7 +351,8 @@ function renderCart() {
                     element('button',
                         {
                             className:'quantity-btn flex col align-center justify-center',
-                            onClick:`changeQuantity(${index}, ${-1}, 'cart-item${index}')`
+                            index:index,
+                            value:-1,
                         },
                         '-'
                     )
@@ -464,21 +471,118 @@ function handleApplyDiscount() {
     updateCartSummary();
 }
 
+/**
+ * ##########################################################
+ * ############### Event Handlers & Listeners ###############
+ * ##########################################################
+ */
+// Load food items on load 
 document.addEventListener("DOMContentLoaded", () => {
     loadItems(); // render items when script is loaded
+});
+
+// Handle Clicking on a category in sidebar
+document.getElementById('category-wrapper').addEventListener('click', function(event) {
+    // ensure handler is attached to outer div and not children
+    const sidebarItem = event.target.closest('.sidebar-item');
+  
+    // Check if a .sidebar-item was clicked
+    if (sidebarItem && sidebarItem.classList.contains('sidebar-item')) {
+
+        const value = sidebarItem.getAttribute('value');
+
+        if (value !== null) {
+            if (value === 'Favourite') {
+                applyFilter({favourite:true});
+            } else if (value === "null") {
+                applyFilter(null);
+            } else {
+                applyFilter({category:value});
+            }
+        }
+    }
+});
+  
+// Handle searching query using searching bar on input
+document.getElementById('search-input').addEventListener('input', function(event) {
+    handleSearch(event);
+});
+
+// Handle selecting a sorting option from sort dropdown menu 
+document.getElementById('sorting-dropdown').addEventListener('change', function(event) {
+    handleSort(event.target.value);
+});
+
+// Handle pressing the "Apply" button to apply a discount code
+document.getElementById('apply-btn').addEventListener('click', function(event) {
+    handleApplyDiscount();
 })
 
+// Handle clicking on "Add" button on a food item tile 
+document.getElementById('main-content').addEventListener('click', function(event) {
+    // Make sure were selecting the add button and not some other child element
+    const addBtn = event.target.closest('.food-item-add-btn');
 
-// expose functions to html
-window.handleSearch        = handleSearch;
-window.loadItems           = loadItems;
-window.handleAddItem       = handleAddItem;
-window.handleCloseModal    = handleCloseModal;
-window.handleCheck         = handleCheck;
-window.handleAddToCart     = handleAddToCart;
-window.changeQuantity      = changeQuantity;
-window.updateCartSummary   = updateCartSummary;
-window.handleApplyDiscount = handleApplyDiscount;
-window.handleSort          = handleSort;
-window.handleFavourite     = handleFavourite;
-window.applyFilter         = applyFilter;
+    if (addBtn && addBtn.classList.contains('food-item-add-btn')) {
+        const value = addBtn.getAttribute('value');
+
+        handleAddItem(event, value);
+    }
+});
+
+// Handle clicking on favourite button (heart button) on a food item tile
+document.getElementById('main-content').addEventListener('click', function(event) {
+    // Make sure were selecting the add button and not some other child element
+    const favouriteBtn = event.target.closest('.favourite-btn');
+
+    if (favouriteBtn && favouriteBtn.classList.contains('favourite-btn')) {
+        const index = favouriteBtn.getAttribute('index');
+
+        handleFavourite(parseInt(index));
+    }
+});
+
+// Handle closing the checkout modal
+document.getElementById('main-content').addEventListener('click', function(event) {
+    // Make sure were selecting the add button and not some other child element
+    const addBtn = event.target.closest('#exit-icon');
+
+    if (addBtn) {
+        handleCloseModal();
+    }
+});
+
+// Handle checking an add-on in the checkout modal
+document.getElementById('main-content').addEventListener('click', function(event) {
+    // Make sure were selecting the add button and not some other child element
+    const checkBox = event.target.closest('.addon-checkbox');
+    
+
+    if (checkBox && checkBox.classList.contains('addon-checkbox')) {
+        const value = checkBox.getAttribute('value');
+        handleCheck(event, value);
+    }
+});
+
+// Handle adding a food item to shopping cart (clicking "Add to Order" button in checkout modal)
+document.getElementById('main-content').addEventListener('click', function(event) {
+    // Make sure were selecting the add button and not some other child element
+    const checkoutBtn = event.target.closest('#food-item-checkout-btn');
+
+    if (checkoutBtn) {
+        handleAddToCart(checkoutBtn.value);
+    }
+});
+
+// Handle clicking on a quantity button 
+document.getElementById('cart-content').addEventListener('click', function(event) {
+    // Make sure were selecting the add button and not some other child element
+    const quantityBtn = event.target.closest('.quantity-btn');
+    
+
+    if (quantityBtn && quantityBtn.classList.contains('quantity-btn')) {
+        const value = quantityBtn.getAttribute('value');
+        const index = quantityBtn.getAttribute('index');
+        changeQuantity(parseInt(index), parseInt(value), `cart-item${index}`);
+    }
+});

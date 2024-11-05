@@ -22,43 +22,43 @@
                     <h1 id="title">Chompify</h1>
                 </div>
                 <div id="category-wrapper" class="flex col align-start">
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter(null)">
-                        <img src="./Assets/menu.png" class="sidebar-icon" alt="All"/>
-                        <h3 class="category-label">All</h3>
+                    <div class="flex row align-center justify-start sidebar-item" value="null">
+                        <img src="./Assets/menu.png" class="sidebar-icon" alt="All" value="null"/>
+                        <h3 class="category-label" value="null">All</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({category:'Appetizer'})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Appetizer">
                         <img src="./Assets/appetizer-icon.png" class="sidebar-icon" alt="Appetizers"/>
                         <h3 class="category-label">Appetizers</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({category:'Taco'})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Taco">
                         <img src="./Assets/taco-icon.png" class="sidebar-icon" alt="Tacos"/>
                         <h3 class="category-label">Tacos</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({category:'Burrito'})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Burrito">
                         <img src="./Assets/burrito-icon.png" class="sidebar-icon" alt="Burritos"/>
                         <h3 class="category-label">Burritos</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({category:'Quesadilla'})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Quesadilla">
                         <img src="./Assets/quesadilla-icon.png" class="sidebar-icon" alt="Quesadillas"/>
                         <h3 class="category-label">Quesadilla</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({category:'Main'})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Main">
                         <img src="./Assets/main.png" class="sidebar-icon" alt="Mains"/>
                         <h3 class="category-label">Mains</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({category:'Dessert'})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Dessert">
                         <img src="./Assets/dessert-icon.png" class="sidebar-icon" alt="Desserts"/>
                         <h3 class="category-label">Desserts</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({category:'Drink'})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Drink">
                         <img src="./Assets/drink-icon.png" class="sidebar-icon" alt="Drinks"/>
                         <h3 class="category-label">Drinks</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({category:'Side'})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Side">
                         <img src="./Assets/sauce-icon.png" class="sidebar-icon" alt="Sides"/>
                         <h3 class="category-label">Sides</h3>
                     </div>
-                    <div class="flex row align-center justify-start sidebar-item" onclick="applyFilter({favourite:true})">
+                    <div class="flex row align-center justify-start sidebar-item" value="Favourite">
                         <img src="./Assets/favourite.svg" class="sidebar-icon" alt="Favourites"/>
                         <h3 class="category-label">Favourites</h3>
                     </div>
@@ -71,10 +71,9 @@
                 <div id="search-container" class="flex row align-center justify-between">
                     <div id="search-input-container" class="flex row align-center">
                         <img src="Assets/search.png" id="search-icon" alt="SEARCH"/>
-                        <input type="text" id="search-input" placeholder="Search a dish or category..." oninput="handleSearch(event)"/>
+                        <input type="text" id="search-input" placeholder="Search a dish or category..." />
                     </div>
-                    <button id="search-btn" onclick="handleSearch(event)">Search</button>
-                    <select id="sorting-dropdown" onchange="handleSort(this.value)">
+                    <select id="sorting-dropdown">
                         <option selected value="0">Sort</option>
                         <option value="1">Price: Low to High</option>
                         <option value="2">Price: High to Low</option>
@@ -93,7 +92,7 @@
                 <div id="cart-content" class="flex col align-start"></div>
                 <div class="flex row align-center justify-between" id="discount-section">
                     <input type="text" placeholder="e.g. x93kjscv" id="discount-input" value=""/>
-                    <button id="apply-btn" onclick="handleApplyDiscount()" class="flex col align-center">Apply</button>
+                    <button id="apply-btn" class="flex col align-center">Apply</button>
                 </div>
                 <div id="discount-error-message">Invalid Discount Code!</div>
                 <div id="discount-applied-message">Discount Applied!</div>
