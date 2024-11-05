@@ -1,5 +1,5 @@
 /**
- * Contains functions for creating HTML elements in javacript 
+ * Contains function for creating HTML elements in javacript 
  */
 
 /**

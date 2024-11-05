@@ -20,6 +20,12 @@ const categoryIcons = {
     'Quesadilla' : './Assets/quesadilla-icon.png'
 }
 
+/**
+ * Paths to unfilled and filled heart icons
+ */
+const favouriteIconPath = "./Assets/favourite.svg";
+const favouritedIconPath = "./Assets/favourited.svg";
+
 
 /**
  * Applies filter to menu items shown 
@@ -56,7 +62,7 @@ function loadItems() {
         }
 
         // Determine whether heart (favourite) icon should be filled in or not in the food item tile 
-        let favouriteIcon = menuItem.favourite != null & menuItem.favourite ? './Assets/favourited.svg' : './Assets/favourite.svg';
+        let favouriteIcon = menuItem.favourite != null & menuItem.favourite ? favouritedIconPath : favouriteIconPath;
 
         let itemId = menuItem.id;
     
@@ -275,7 +281,6 @@ function handleCheck(event, price) {
 }
 
 
-
 /**
  * Handles clicking the 'ADD' button in the floating checkout modal
  */
@@ -394,19 +399,23 @@ function changeQuantity(index, amount, id) {
  * For updating the shopping cart summary with appropriate Subtotal, Discount, and Total values 
  */
 function updateCartSummary() {
+    // If no items in shopping cart 
     if (shoppingCart.length == 0) {
         document.getElementById('subtotal').innerHTML = `£${0}`;
         document.getElementById('discount').innerHTML = `£${0}`;
         document.getElementById('total').innerHTML = `£${0}`;
     }
 
+    // Calculate total cost
     total = 0;
     shoppingCart.forEach((item) => {
         total += item.totalPrice;
     })
 
+    // Display total cost 
     document.getElementById('subtotal').innerHTML = `£${total.toFixed(2)}`;
 
+    // Apply discount
     if (discountApplied) {
         document.getElementById('discount').innerHTML = `£${(total * 0.1).toFixed(2)}`;
         document.getElementById('total').innerHTML = `£${(total * 0.9).toFixed(2)}`;
@@ -441,7 +450,6 @@ function handleCloseModal() {
  * Handles searching a query using search bar 
  */
 function handleSearch(){
-
     let searchInput = document.getElementById('search-input');
     let query = searchInput.value;
 
@@ -472,9 +480,9 @@ function handleApplyDiscount() {
 }
 
 /**
- * ##########################################################
- * ############### Event Handlers & Listeners ###############
- * ##########################################################
+ * ################################################################
+ * ################## Event Handlers & Listeners ##################
+ * ################################################################
  */
 // Load food items on load 
 document.addEventListener("DOMContentLoaded", () => {
@@ -518,61 +526,36 @@ document.getElementById('apply-btn').addEventListener('click', function(event) {
     handleApplyDiscount();
 })
 
-// Handle clicking on "Add" button on a food item tile 
+// Event delegation for all events that could occur within the #main-content div
 document.getElementById('main-content').addEventListener('click', function(event) {
-    // Make sure were selecting the add button and not some other child element
+    // the "Add" button on each food item tile
     const addBtn = event.target.closest('.food-item-add-btn');
-
-    if (addBtn && addBtn.classList.contains('food-item-add-btn')) {
-        const value = addBtn.getAttribute('value');
-
-        handleAddItem(event, value);
-    }
-});
-
-// Handle clicking on favourite button (heart button) on a food item tile
-document.getElementById('main-content').addEventListener('click', function(event) {
-    // Make sure were selecting the add button and not some other child element
+    // The favourite (heart) button on each food item tile
     const favouriteBtn = event.target.closest('.favourite-btn');
-
-    if (favouriteBtn && favouriteBtn.classList.contains('favourite-btn')) {
-        const index = favouriteBtn.getAttribute('index');
-
-        handleFavourite(parseInt(index));
-    }
-});
-
-// Handle closing the checkout modal
-document.getElementById('main-content').addEventListener('click', function(event) {
-    // Make sure were selecting the add button and not some other child element
-    const addBtn = event.target.closest('#exit-icon');
-
-    if (addBtn) {
-        handleCloseModal();
-    }
-});
-
-// Handle checking an add-on in the checkout modal
-document.getElementById('main-content').addEventListener('click', function(event) {
-    // Make sure were selecting the add button and not some other child element
+    // the exit "X" button on the food item checkout modal
+    const exitIcon = event.target.closest('#exit-icon');
+    // the checkbox for each add on in the food item checkout modal
     const checkBox = event.target.closest('.addon-checkbox');
-    
-
-    if (checkBox && checkBox.classList.contains('addon-checkbox')) {
-        const value = checkBox.getAttribute('value');
-        handleCheck(event, value);
-    }
-});
-
-// Handle adding a food item to shopping cart (clicking "Add to Order" button in checkout modal)
-document.getElementById('main-content').addEventListener('click', function(event) {
-    // Make sure were selecting the add button and not some other child element
+    // the "add to order" button on the food item checkout modal
     const checkoutBtn = event.target.closest('#food-item-checkout-btn');
 
-    if (checkoutBtn) {
+    // Handle each event
+    if (addBtn) {
+        const value = addBtn.getAttribute('value');
+        handleAddItem(event, value);
+    } else if (favouriteBtn) {
+        const index = favouriteBtn.getAttribute('index');
+        handleFavourite(parseInt(index));
+    } else if (exitIcon) {
+        handleCloseModal();
+    } else if (checkBox) {
+        const value = checkBox.getAttribute('value');
+        handleCheck(event, value);
+    } else if (checkoutBtn) {
         handleAddToCart(checkoutBtn.value);
     }
 });
+
 
 // Handle clicking on a quantity button 
 document.getElementById('cart-content').addEventListener('click', function(event) {
