@@ -58,7 +58,7 @@ body {
     height:100%;
 }
 
-#sidebar {
+#left-content {
     width:25%;
     height:100vh;
 
@@ -341,7 +341,7 @@ body {
 /* ################################*/
 
 
-#cart {
+#right-content {
     width:25%;
     height:100%;
     z-index: 100;
