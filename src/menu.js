@@ -11,7 +11,7 @@ const menuItems = [
         { name: "Sour Cream", price: 50 }, // 0.50 GBP
         { name: "Extra Cheese", price: 75 }, // 0.75 GBP
       ],
-      img:'./Assets/food_images/nachos.jpg'
+      img:'./Assets/food_images/nachos.webp'
     },
     {
       id:2,
@@ -25,7 +25,7 @@ const menuItems = [
         { name: "Extra Chicken", price: 150 }, // 1.50 GBP
         { name: "Spicy Salsa", price: 50 }, // 0.50 GBP
       ],
-      img:'./Assets/food_images/chicken_tacos.jpg'
+      img:'./Assets/food_images/chicken_tacos.webp'
     },
     {
         id:3,
@@ -39,7 +39,7 @@ const menuItems = [
           { name: "Extra Beef", price: 150 }, // 1.50 GBP
           { name: "Spicy Salsa", price: 50 }, // 0.50 GBP
         ],
-        img:'./Assets/food_images/beef-taco.jpg'
+        img:'./Assets/food_images/beef-taco.webp'
     },
     {
         id:4,
@@ -53,7 +53,7 @@ const menuItems = [
           { name: "Monterry Jack Cheese", price: 75 }, // 0.75 GBP
           { name: "Salsa Verde", price: 50 }, // 0.50 GBP
         ],
-        img:'./Assets/food_images/carnitas-taco.jpg'
+        img:'./Assets/food_images/carnitas-taco.webp'
     },
     {
         id:5,
@@ -67,7 +67,7 @@ const menuItems = [
           { name: "Monterry Jack Cheese", price: 75 }, // 0.75 GBP
           { name: "Salsa Verde", price: 50 }, // 0.50 GBP
         ],
-        img:'./Assets/food_images/birria_tacos.jpg'
+        img:'./Assets/food_images/birria_tacos.webp'
     },
     {
         id:6,
@@ -81,7 +81,7 @@ const menuItems = [
           { name: "Monterry Jack Cheese", price: 75 }, // 0.75 GBP
           { name: "Salsa Verde", price: 50 }, // 0.50 GBP
         ],
-        img:'./Assets/food_images/shrimp_tacos.jpg'
+        img:'./Assets/food_images/shrimp_tacos.webp'
     },
     {
       id:7,
@@ -95,7 +95,7 @@ const menuItems = [
         { name: "Vegan Cheese", price: 75 }, // 0.75 GBP
         { name: "Salsa Verde", price: 50 }, // 0.50 GBP
       ],
-      img:"./Assets/food_images/mushroom-taco.png"
+      img:"./Assets/food_images/mushroom-taco.webp"
     },
     {
       id:8,
@@ -109,7 +109,7 @@ const menuItems = [
         { name: "Extra Lime Mayo", price: 50 }, // 0.50 GBP
         { name: "Pickled Onions", price: 50 }, // 0.50 GBP
       ],
-      img:"./Assets/food_images/fish_taco.png"
+      img:"./Assets/food_images/fish_taco.webp"
     },
     {
       id:9,
@@ -123,7 +123,7 @@ const menuItems = [
         { name: "Sour Cream", price: 50 }, // 0.50 GBP
         { name: "Extra Cheese", price: 75 }, // 0.75 GBP
       ],
-      img:"./Assets/food_images/quesadilla.jpg"
+      img:"./Assets/food_images/quesadilla.webp"
     },
     {
       id:10,
@@ -136,7 +136,7 @@ const menuItems = [
         { name: "Extra Cinnamon", price: 25 }, // 0.25 GBP
         { name: "Large Size", price: 99 }, // 0.99 GBP
       ],
-      img:'./Assets/food_images/horchata.jpg'
+      img:'./Assets/food_images/horchata.webp'
     },
     {
         id:11,
@@ -149,7 +149,7 @@ const menuItems = [
           { name: "Extra Strawberry", price: 25 }, // 0.25 GBP
           { name: "Large Size", price: 99 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/tresleches.jpg'
+        img:'./Assets/food_images/tresleches.webp'
       },
       {
         id:12,
@@ -162,7 +162,7 @@ const menuItems = [
           { name: "Extra jalapeno", price: 25 }, // 0.25 GBP
           { name: "Large Size", price: 99 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/tomatosalsa.jpg'
+        img:'./Assets/food_images/tomatosalsa.webp'
       },
       {
         id:13,
@@ -174,7 +174,7 @@ const menuItems = [
         extras: [
           { name: "Large Size", price: 99 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/guac.jpg'
+        img:'./Assets/food_images/guac.webp'
       },
       {
         id:14,
@@ -185,7 +185,7 @@ const menuItems = [
           "Sweet and refreshing Mexican Jarrito Soda.",
         extras: [
         ],
-        img:'./Assets/food_images/jarritos.jpg'
+        img:'./Assets/food_images/jarritos.webp'
       },
       {
         id:15,
@@ -198,7 +198,7 @@ const menuItems = [
           { name: "Extra Beef", price: 25 }, // 0.25 GBP
           { name: "Large Size", price: 99 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/beef_burrito.jpg'
+        img:'./Assets/food_images/beef_burrito.webp'
       },
       { 
         id:16,
@@ -211,7 +211,7 @@ const menuItems = [
           { name: "Extra Chicken", price: 25 }, // 0.25 GBP
           { name: "Large Size", price: 99 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/chicken_burrito.jpg'
+        img:'./Assets/food_images/chicken_burrito.webp'
       },
       {
         id:17,
@@ -224,7 +224,7 @@ const menuItems = [
           { name: "Extra Chorizo", price: 25 }, // 0.25 GBP
           { name: "Large Size", price: 99 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/chorizo_burrito.jpg'
+        img:'./Assets/food_images/chorizo_burrito.webp'
       },
       {
         id:18,
@@ -237,7 +237,7 @@ const menuItems = [
           { name: "Extra Cheese", price: 125 }, // 0.25 GBP
           { name: "Large Size", price: 399 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/chilerelleno.jpg'
+        img:'./Assets/food_images/chilerelleno.webp'
       },
       {
         id:19,
@@ -250,7 +250,7 @@ const menuItems = [
           { name: "Extra Pork", price: 125 }, // 0.25 GBP
           { name: "Large Size", price: 399 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/tamale.jpg'
+        img:'./Assets/food_images/tamale.webp'
       },
       {
         id:20,
@@ -263,7 +263,7 @@ const menuItems = [
           { name: "Add Pork", price: 225 }, // 0.25 GBP
           { name: "Large Size", price: 399 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/huevosrancheros.jpg'
+        img:'./Assets/food_images/huevosrancheros.webp'
       },
       {
         id:21,
@@ -275,7 +275,7 @@ const menuItems = [
         extras: [
           { name: "Large Size", price: 299 }, // 0.99 GBP
         ],
-        img:'./Assets/food_images/chipsandguac.jpg'
+        img:'./Assets/food_images/chipsandguac.webp'
       }
   ];
   

@@ -61,7 +61,7 @@ function applyFilter(obj) {
 
 
 /**
- * Renders content belt of menu items
+ * Renders content belt of menu food items
  * @param {*} filter : object specifying what to filter by and the value
  *                     Example : {category:'Taco'} or {name:'Birria Tacos'}
  */
@@ -92,12 +92,13 @@ function loadItems() {
         let foodItem = element("div", 
             {className:'food-item flex row align-center', id:`${itemId}`},
             element("img", 
-                {src:menuItem.img, className:'food-pic'}
+                {src:menuItem.img, className:'food-pic', alt:menuItem.name}
             ),
             element('img', 
                 {
                     id:`favourite${itemId}`,
                     className:'favourite-btn flex row align-center justify-center',
+                    alt:'Favourite',
                     src:favouriteIcon,
                     index:itemId
                 }
@@ -117,7 +118,7 @@ function loadItems() {
                     element('div',
                         {className:"food-item-category flex row align-center"},
                         element('img',
-                            {className:"food-item-category-icon", src:categoryIcons[menuItem.category]},
+                            {className:"food-item-category-icon", src:categoryIcons[menuItem.category], alt:menuItem.category},
                         ),
                         menuItem.category
                     ),

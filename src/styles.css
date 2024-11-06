@@ -33,7 +33,7 @@ body {
     height:100%; 
     width:100%;
     position:fixed;
-    /* top:-0.5rem; */
+    margin-top : 0px;
 }
 
 #page-wrapper{
@@ -90,6 +90,7 @@ body {
 
 .sidebar-icon {
     height:2.5rem;
+    width:2.5rem;
     margin-right:1rem;
 }
 
@@ -258,6 +259,7 @@ body {
 }
 
 .food-item-description {
+    font-display:swap;
     color:gray;
     font-size: 1em;
     margin-top : 0.5rem;
