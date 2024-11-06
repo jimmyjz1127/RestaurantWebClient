@@ -1,45 +1,45 @@
 @media (max-width : 1350px) {
+    /* reduce all elements using rem  */
     :root{
-        font-size:14px;
-    }
-
-    #place-order-btn {
-        font-size : 1em;
-    }
-
-    #search-container {
         font-size:14px;
     }
 }
 
 @media (max-width : 1000px) {
+    /* reduce all elements using rem  */
     :root{
         font-size:12px;
     }
 
+    /* Reduce font size of food item description */
     .food-item {
         font-size : 14px;
     }
 
+    /* Reduce the height of the div containing all categories (left side menu) */
     #category-wrapper {
         height : 65%;
     }
 }
 
 @media (max-width : 800px) {
+    /* reduce all elements using rem  */
     :root{
         font-size:10px;
     }
 
+    /* widen search container */
     #search-container {
         height : 10%;
         width:90%;
     }
 
+    /* make category labels smaller  */
     .sidebar-item {
         font-size:14px;
     }
 
+    /* convert each food item to a flex-column and reduce width */
     .food-item {
         display:flex;
         flex-direction:column;
@@ -48,39 +48,43 @@
         width:80%;
     }
 
+    /* Reduce width of middle content section */
     #middle-content {
         width:50%;
     }
 
+    /* make category side bar menu more narrow */
     #left-content {
         width : 25%;
     }
 
+    /* make order details (shopping cart section) wider */
     #right-content {
         width : 35%;
     }
 
+    /* make checkout modal popup wider */
     #item-checkout  {
         width : 90%;
         font-size:16px;
     }
 
+    /* make food item tile description font size larger */
     .food-item-info {
         font-size:16px;
     }
 
+    /* make the food item thumbnail picture larger */
     .food-pic {
         width:40%;
     }
 
-    #cart-summary {
-        font-size:14px;
-    }
-
+    /* move the discount text input on top of the "Apply" button */
     #discount-section {
         flex-direction:column !important;
     }
 
+    /* make the container holding the discount code input and "Apply" button wider */
     #discount-section > *  {
         width : 100%;
         font-size:1.25rem;
@@ -88,16 +92,19 @@
         margin-bottom:0.25em !important;
     }
 
+    /* add margin above place-order-btn */
     #place-order-btn {
         margin-top:0.5em;
     }
 }
 
 @media (max-width : 750px) {
+    /* reduce all elements using rem  */
     :root{
         font-size:8px;
     }
 
+    /* reduce the size of food item tile */
     .food-item {
         font-size : 12px;
         height:20%;
@@ -113,15 +120,22 @@
 /* ######################################################## */
 
 @media (max-width : 700px) {
+    /* reduce size of all elements using rem */
     :root{
         font-size:12px;
     }
 
+    /* 
+        make body element position relative to allow 
+        children to use position absolute
+    
+    */
     body {
         position:relative;
         margin:0px;
     }
 
+    /* make width of middle section 100% since category menu and order details dissappear */
     #middle-content {
         width:100%;
     }
@@ -130,70 +144,103 @@
         margin-top:12vh;
     }
 
+    /* Get rid of webpage title and logo */
     #title-container {
         display:none;
     }
 
+    /* remove search magnifying glass logo to create more space */
     #search-icon {
         display:none;
     }
 
+
     #search-container {
+        /* pin search bar container to top of webpage (convert to a navbar) */
         position:absolute;
-        padding-left : 1em;
-        padding-right: 1em;
         top:0px;
         left:0px;
+
+        /*  reduce left and right padding to create more room in top nav bar */
+        padding-left : 1em;
+        padding-right: 1em;
+        
+        /* make sure navbar is in front and opaque */
         z-index:100;
         filter:opacity(1);
+
+        /* make navbar full width  */
         width:100%;
+
+        /* increase height */
         height:10%;
         margin:0px;
+
+        /* increase font size */
         font-size:14px;
         border-radius:0px;
     }
 
+    /* make elements in navbar closer to conserve space */
     #search-container > * {
         margin-left : 2px;
         margin-right : 2px;
     }
 
+    /* make sorting dropdown menu more narrow */
     #sorting-dropdown {
         width : 20%;
     }
 
+    /* make category menu navbar button show (since now the left-content menu is gone) */
     #category-btn{
         display:block;
     }
 
+    /* make order details (shopping cart) section navbar button show */
     #cart-btn {
         display:block;
     }
 
+    /* make order details shorter in height */
     #cart-content {
         max-height:70%;
         min-height:25%;
     }
 
+
     #left-content {
+        /* make category menu disappear */
         display:none;
+
+        /* pin to left, under the navbar */
         position:absolute;
         left:0px;
         top:10%;
+
+        /* make sure it is in front of food items */
         z-index: 100;
         background-color: white;
         filter:opacity(0.95);
+
+        /* make wider and shorter */
         height:90%;
         width:40%;
     }
 
     #right-content {
+        /* make the order details section disappear */
         display:none;
+
+        /* pin to top right under navbar */
         position:absolute;
         right:0px;
         top:10%;
+
+        /* make sure appears in front of food items */
         z-index: 100;
 
+        /* make wider and shorter */
         width:75%;
         height:70%;
 
@@ -201,24 +248,31 @@
         filter:opacity(0.95);
         box-sizing:border-box;
 
+        /* give a new shadow and add border radius to bottom left */
         border-bottom-left-radius: 0.75rem;
         box-shadow: 1px 3px 5px 5px rgba(0,0,0,0.1);
     }
 
+    /* make font size in order details larger since order details section is wider now */
     .cart-item {
         font-size:16px;
     }
 
+    /* make place order button font-size larger */
     #place-order-btn {
         font-size:1.5rem;
     }
 
+    /* make the checkout popup modal wider and fontsize larger */
     #item-checkout {
         width:90%;
-        font-size:16px;
+
+        /* children use em */
+        font-size:16px; 
     }
 }
 
+/* make sure left-content and right-content sections re-appear when screen re-widens */
 @media (min-width : 701px) {
     #right-content {
         display : flex;
