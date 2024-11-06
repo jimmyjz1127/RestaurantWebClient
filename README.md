@@ -12,3 +12,10 @@
     - `script.js`       : primary script 
     - `styles.css`      : primary styling sheet
 
+## Attributions 
+Section contains sources for where I got my icons from 
+
+
+| Icon File | Source URL | 
+|-----------|------------|
+|`Assets/appetizer-icon.png`| https://www.flaticon.com/free-icon/nachos_5401190?term=appetizer&page=1&position=6&origin=search&related_id=5401190|

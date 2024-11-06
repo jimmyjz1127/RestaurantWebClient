@@ -1,6 +1,21 @@
 "use strict";
+
+/**
+ * This script is organised in the following order 
+ * 1) Variables 
+ * 2) Functions 
+ * 3) Event Listeners 
+ */
+
+
 import menuItems from './menu.js';
 import element from './elements.js';
+
+/**
+ * ###################################################################
+ * ############################ VARIABLES ############################
+ * ###################################################################
+ */
 
 let shoppingCart = [];          // shopping cart of menu item objects
 let discountApplied = false;    // boolean for whether discount code has been applied 
@@ -25,6 +40,13 @@ const categoryIcons = {
  */
 const favouriteIconPath = "./Assets/favourite.svg";
 const favouritedIconPath = "./Assets/favourited.svg";
+
+
+/**
+ * ###################################################################
+ * ############################ FUNCTIONS ############################
+ * ###################################################################
+ */
 
 
 /**
@@ -480,9 +502,9 @@ function handleApplyDiscount() {
 }
 
 /**
- * ################################################################
- * ################## Event Handlers & Listeners ##################
- * ################################################################
+ * ######################################################################
+ * ##################### EVENT HANDLERS & LISTENERS #####################
+ * ######################################################################
  */
 // Load food items on load 
 document.addEventListener("DOMContentLoaded", () => {
@@ -571,7 +593,7 @@ document.getElementById('cart-content').addEventListener('click', function(event
 });
 
 // Handlers for mobile 
-
+// Handle clicking on category menu button (top left)
 document.getElementById('category-btn').addEventListener('click', function(event) {
     const categoryMenu = document.getElementById('left-content');
 
@@ -580,29 +602,34 @@ document.getElementById('category-btn').addEventListener('click', function(event
 
         const orderDetails = document.getElementById('right-content');
 
+        // close the order details popup if open
         if (orderDetails.classList.contains('show')) {
             orderDetails.classList.toggle('show');
         }
     }
 });
 
-
+// Handle clickling on cart icon to open order details in the top right
 document.getElementById('cart-btn').addEventListener('click', function(event) {
     const orderDetails = document.getElementById('right-content');
 
+    // if window is less then 700 pixels in width
     if (window.innerWidth <= 700) {
         orderDetails.classList.toggle('show');
 
         const categoryMenu = document.getElementById('left-content');
 
+        // close the category menu if open
         if (categoryMenu.classList.contains('show')) {
             categoryMenu.classList.toggle('show');
         }
     }
 });
 
+// Make sure the left-content and right-content sections re-appear when screen widens
 window.addEventListener('resize', function() {
-    if (window.innerWidth > 701) {
+    // if window gets wider than 701 pixels
+    if (window.innerWidth > 700) {
         document.getElementById('left-content').classList.remove('show');
         document.getElementById('right-content').classList.remove('show');
     }

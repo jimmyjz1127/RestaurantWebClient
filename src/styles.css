@@ -1,7 +1,7 @@
 /* Global Variables */
 :root{
     --offwhite  : rgba(248, 248, 248, 0.932);
-    --border-radius : 0.75em;
+    --border-radius : 0.75rem;
     --search-background-color:rgb(237, 237, 237);
     --purple-theme:rgb(129, 11, 129);
     --input-padding : 0.75em 1.75em 0.75em 1.75em;
@@ -36,6 +36,10 @@ body {
     /* top:-0.5rem; */
 }
 
+#page-wrapper{
+    width:100%;
+    height:100%;
+}
 
 
 /* ############################*/
@@ -48,17 +52,11 @@ body {
 #title {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color:var(--purple-theme);
-    font-size:2rem;
+    font-size:1.8rem;
 }
 
 #chompify-logo{
-    width:5vw;
-}
-
-
-#page-wrapper{
-    width:100%;
-    height:100%;
+    width:2.85rem;
 }
 
 #left-content {
@@ -71,7 +69,7 @@ body {
 
 #category-wrapper{
     width:100%;
-    height:100%;
+    height:80%;
 }
 
 .sidebar-item{
@@ -79,6 +77,7 @@ body {
     width:95%;
     padding-top:2%;
     padding-bottom:2%;
+    font-size:16px;
 }
 
 .sidebar-item:hover{
@@ -95,7 +94,7 @@ body {
 }
 
 .category-label {
-    font-size:1.25rem;
+    font-size:1.25em;
 }
 
 
@@ -112,7 +111,7 @@ body {
 
 #search-container {
     width:85%;
-    height:8%;
+    min-height:5rem;
     
     border-radius: var(--border-radius);
     box-shadow: 1px 3px 5px 5px rgba(0,0,0,0.1);
@@ -170,7 +169,7 @@ body {
     height:100%;
     padding-left:0.5rem;
     outline:none;
-    font-size:1em;
+    font-size:1rem;
 }
 
 #sorting-dropdown {
@@ -406,11 +405,11 @@ body {
 }
 
 .cart-item-title {
-    font-size:1.2rem;
+    font-size:1.2em;
 }
 
 .cart-item-addons {
-    font-size:0.8rem;
+    font-size:0.8em; 
     color : gray;
     margin-bottom:0.5em;
 }
@@ -452,6 +451,7 @@ body {
     margin-top:1em;
     padding-top : 1em;
     border-top:3px solid var(--dark-grey);
+    font-size:16px;
 }
 
 #discount-error-message {
@@ -466,13 +466,13 @@ body {
 }
 
 #discount-input{
-    margin-left:0.5rem;
     border:none;
     background-color:rgb(230, 230, 230);
     border-radius : var(--border-radius);
     padding : var(--input-padding);
-    width:40%;
-    font-size:0.85rem;
+    width:60%;
+    box-sizing: border-box;
+    font-size:0.85em;
 }
 
 #apply-btn {
@@ -481,7 +481,8 @@ body {
     padding : var(--input-padding);
     width:35%;
     border-radius : var(--border-radius);
-    font-size:0.85rem;
+    box-sizing: border-box;
+    font-size:0.85em;
 }
 
 #place-order-btn{
@@ -489,7 +490,7 @@ body {
     padding : var(--input-padding);
     border-radius: var(--border-radius);
     margin-bottom:3em;
-    font-size:1.2rem;
+    font-size:1.2em;
     background-color : var(--purple-theme);
     color:white;
 }
