@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Chompify</title>
         <link rel="icon" href="./Assets/chompify.png" type="image/png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="190015412">
 
         <link rel="stylesheet" href="styles.css">
@@ -15,7 +16,7 @@
         
     </head>
     <body>
-        <div id="page-wrapper" class="flex row align-start">
+        <div id="page-wrapper" class="flex row align-center justify-center">
             <div id="left-content" class="flex col align-start">
                 <div id="title-container" class="flex row align-center">
                     <img src="Assets/chompify.png" id="chompify-logo" alt="Chompify"/>
@@ -62,13 +63,12 @@
                         <img src="./Assets/favourite.svg" class="sidebar-icon" alt="Favourites"/>
                         <h3 class="category-label">Favourites</h3>
                     </div>
-                </div>
-
-                
-            </div>
+                </div> <!-- end category-wrapper -->
+            </div> <!-- end left-content -->
 
             <div id="middle-content" class="flex col align-center">
                 <div id="search-container" class="flex row align-center justify-between">
+                    <button id="category-btn" ></button>
                     <div id="search-input-container" class="flex row align-center">
                         <img src="Assets/search.png" id="search-icon" alt="SEARCH"/>
                         <input type="text" id="search-input" placeholder="Search a dish or category..." />
@@ -80,12 +80,11 @@
                         <option value="3">Category: A-Z</option>
                         <option value="4">Category: Z-A</option>
                     </select>
+                    <button id="cart-btn"></button>
                 </div>
-
                 <div id="main-content" class="flex col align-center">
                 </div>
-
-            </div>
+            </div> <!-- end middle-content -->
 
             <div id="right-content" class="flex col align-center">
                 <div id="cart-header-container" class="flex row justify-center">Order Details</div>
@@ -109,7 +108,7 @@
                     </div>
                 </div>
                 <button id="place-order-btn">Place Order</button>
-            </div>
+            </div> <!-- end right-content -->
 
 
         </div>

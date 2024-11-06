@@ -569,3 +569,41 @@ document.getElementById('cart-content').addEventListener('click', function(event
         changeQuantity(parseInt(index), parseInt(value), `cart-item${index}`);
     }
 });
+
+// Handlers for mobile 
+
+document.getElementById('category-btn').addEventListener('click', function(event) {
+    const categoryMenu = document.getElementById('left-content');
+
+    if (window.innerWidth <= 700) {
+        categoryMenu.classList.toggle('show');
+
+        const orderDetails = document.getElementById('right-content');
+
+        if (orderDetails.classList.contains('show')) {
+            orderDetails.classList.toggle('show');
+        }
+    }
+});
+
+
+document.getElementById('cart-btn').addEventListener('click', function(event) {
+    const orderDetails = document.getElementById('right-content');
+
+    if (window.innerWidth <= 700) {
+        orderDetails.classList.toggle('show');
+
+        const categoryMenu = document.getElementById('left-content');
+
+        if (categoryMenu.classList.contains('show')) {
+            categoryMenu.classList.toggle('show');
+        }
+    }
+});
+
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 701) {
+        document.getElementById('left-content').classList.remove('show');
+        document.getElementById('right-content').classList.remove('show');
+    }
+});
