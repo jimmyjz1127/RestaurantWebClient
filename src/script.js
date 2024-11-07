@@ -17,7 +17,7 @@ import element from './elements.js';
  * ###################################################################
  */
 
-let shoppingCart = [];          // shopping cart of menu item objects
+let shoppingCart = {};          // shopping cart of menu item objects
 let discountApplied = false;    // boolean for whether discount code has been applied 
 let filter = null;              // filter obj for filtering menu items 
 
@@ -25,14 +25,14 @@ let filter = null;              // filter obj for filtering menu items
  * Mapping of category names to their icon paths
  */
 const categoryIcons = {
-    'Taco' : "./Assets/taco-icon.png",
-    'Drink' : './Assets/drink-icon.png',
-    'Dessert' : './Assets/dessert-icon.png',
-    'Burrito' : './Assets/burrito-icon.png',
-    'Main' : './Assets/main.png',
-    'Side' : './Assets/sauce-icon.png',
-    'Appetizer' : './Assets/appetizer-icon.png',
-    'Quesadilla' : './Assets/quesadilla-icon.png'
+    'Taco' : "./Assets/taco-icon.webp",
+    'Drink' : './Assets/drink-icon.webp',
+    'Dessert' : './Assets/dessert-icon.webp',
+    'Burrito' : './Assets/burrito-icon.webp',
+    'Main' : './Assets/main.webp',
+    'Side' : './Assets/sauce-icon.webp',
+    'Appetizer' : './Assets/appetizer-icon.webp',
+    'Quesadilla' : './Assets/quesadilla-icon.webp'
 }
 
 /**
@@ -100,7 +100,7 @@ function loadItems() {
                     className:'favourite-btn flex row align-center justify-center',
                     alt:'Favourite',
                     src:favouriteIcon,
-                    index:itemId
+                    'data-index':itemId
                 }
             ),
             element("div",
@@ -114,7 +114,7 @@ function loadItems() {
                     menuItem.description
                 ),
                 element("div",
-                    {className:"flex row justify-between align-center"},
+                    {className:"flex row justify-between align-center food-item-bottom"},
                     element('div',
                         {className:"food-item-category flex row align-center"},
                         element('img',
@@ -129,10 +129,7 @@ function loadItems() {
                             "£" + (menuItem.price/100).toFixed(2)
                         ),
                         element("button",
-                            {
-                                className:"food-item-add-btn",
-                                value:`${itemId}`,
-                            },
+                            {className:"food-item-add-btn", value:`${itemId}`},
                             "Add"
                         )
                     ),
@@ -229,7 +226,7 @@ function handleAddItem(event, id) {
     let itemCheckout = element('div',
         {id:'item-checkout', className:'flex col align-center'},
         element('img',
-            {src:'./Assets/exit.png', id:'exit-icon'}
+            {src:'./Assets/exit.webp', id:'exit-icon'}
         ), 
         element('img',
             {src:menuItem.img, id:'item-checkout-img'}
@@ -330,7 +327,9 @@ function handleAddToCart(index) {
         totalPrice:price
     }
 
-    shoppingCart.push(cartItem)
+    // shoppingCart.push(cartItem)
+
+    shoppingCart[index] = cartItem
 
     renderCart();
     handleCloseModal();
@@ -345,9 +344,9 @@ function renderCart() {
 
     parent.innerHTML = "";
 
-    shoppingCart.forEach((item, index) => {
+    Object.values(shoppingCart).forEach((item, index) => {
         let cartItem = element('div',
-            {className:'cart-item flex col align-start', id:`cart-item${index}`},
+            {className:'cart-item flex col align-start', id:`cart-item${item.id}`},
             element('div',
                 {className:'flex row align-center justify-start'},
                 element('h3', {className:'cart-item-title'}, item.name)
@@ -359,7 +358,7 @@ function renderCart() {
             element('div', 
                 {className:'flex row align-center justify-between max-width'},
                 element('div',
-                    {className:'cart-price', id:`cart-price${index}`},
+                    {className:'cart-price', id:`cart-price${item.id}`},
                     `£${item.totalPrice.toFixed(2)}`
                 ),
                 element('div',
@@ -367,20 +366,20 @@ function renderCart() {
                     element('button',
                         {
                             className:'quantity-btn flex col align-center justify-center',
-                            index:index,
-                            value:1,
+                            "data-index":item.id,
+                            "data-value":1,
                         },
                         '+'
                     ),
                     element('div',
-                        {className:'cart-item-quantity', id:`quantity${index}`},
+                        {className:'cart-item-quantity', id:`quantity${item.id}`},
                         `${item.quantity}`
                     ),
                     element('button',
                         {
                             className:'quantity-btn flex col align-center justify-center',
-                            index:index,
-                            value:-1,
+                            "data-index":item.id,
+                            "data-value":-1,
                         },
                         '-'
                     )
@@ -398,13 +397,15 @@ function renderCart() {
  * @param {*} id     : the id of tne HTML element representing the order item 
  */
 function changeQuantity(index, amount, id) {
+    // If quantity has been decremented to 0, remove the item from order
     if (shoppingCart[index].quantity + amount <= 0) {
         document.getElementById(id).remove();
-        shoppingCart.splice(index,1);
+        delete shoppingCart[index];
         updateCartSummary();
         return
     }
 
+    // increment quantity of item
     shoppingCart[index].quantity += amount;
 
     shoppingCart[index].totalPrice =  shoppingCart[index].price *  shoppingCart[index].quantity;
@@ -430,8 +431,8 @@ function updateCartSummary() {
     }
 
     // Calculate total cost
-    total = 0;
-    shoppingCart.forEach((item) => {
+    let total = 0;
+    Object.values(shoppingCart).forEach((item) => {
         total += item.totalPrice;
     })
 
@@ -520,7 +521,7 @@ document.getElementById('category-wrapper').addEventListener('click', function(e
     // Check if a .sidebar-item was clicked
     if (sidebarItem && sidebarItem.classList.contains('sidebar-item')) {
 
-        const value = sidebarItem.getAttribute('value');
+        const value = sidebarItem.getAttribute('data-value');
 
         if (value !== null) {
             if (value === 'Favourite') {
@@ -567,7 +568,7 @@ document.getElementById('main-content').addEventListener('click', function(event
         const value = addBtn.getAttribute('value');
         handleAddItem(event, value);
     } else if (favouriteBtn) {
-        const index = favouriteBtn.getAttribute('index');
+        const index = favouriteBtn.getAttribute('data-index');
         handleFavourite(parseInt(index));
     } else if (exitIcon) {
         handleCloseModal();
@@ -587,8 +588,8 @@ document.getElementById('cart-content').addEventListener('click', function(event
     
 
     if (quantityBtn && quantityBtn.classList.contains('quantity-btn')) {
-        const value = quantityBtn.getAttribute('value');
-        const index = quantityBtn.getAttribute('index');
+        const value = quantityBtn.getAttribute('data-value');
+        const index = quantityBtn.getAttribute('data-index');
         changeQuantity(parseInt(index), parseInt(value), `cart-item${index}`);
     }
 });
@@ -635,3 +636,15 @@ window.addEventListener('resize', function() {
         document.getElementById('right-content').classList.remove('show');
     }
 });
+
+// Handle clicking the Place Order button
+document.getElementById('place-order-btn').addEventListener('click', function(event) {
+    if (shoppingCart.length == 0) {
+        alert("Please add items to your order!");
+    } else {
+        alert("Order Placed");
+        shoppingCart = [];
+        renderCart();
+        updateCartSummary();
+    }
+})

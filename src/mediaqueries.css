@@ -16,13 +16,18 @@
         font-size : 14px;
     }
 
+
+    .food-item-bottom {
+        font-size:14px;
+    }
+
     /* Reduce the height of the div containing all categories (left side menu) */
     #category-wrapper {
         height : 65%;
     }
 }
 
-@media (max-width : 800px) {
+@media (max-width : 850px) {
     /* reduce all elements using rem  */
     :root{
         font-size:10px;
