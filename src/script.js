@@ -145,7 +145,7 @@ function loadItems() {
  * @param {*} itemId : ID the of the menu food item
  */
 function handleFavourite(itemId) {
-    let menuItem = menuItems[itemId - 1];
+    let menuItem = menuItems.find(obj => obj.id == itemId);;
     let favouriteIcon = document.getElementById(`favourite${itemId}`);
 
     if (menuItem.favourite != null) {
@@ -185,7 +185,7 @@ function handleAddItem(event, id) {
         addBtn.disabled = true;
     })
 
-    let menuItem = menuItems[id-1];
+    let menuItem = menuItems.find(obj => obj.id == id);
 
     // Conditionally determine whether to render add-ons (extras) section 
     // Depending on whether there are add-ons 
@@ -246,7 +246,7 @@ function handleAddItem(event, id) {
                     `£${(menuItem.price / 100).toFixed(2)}`
                 ),
                 element('button',
-                    {id:'food-item-checkout-btn', value:`${id-1}`},
+                    {id:'food-item-checkout-btn', value:`${id}`},
                     "Add to Order"
                 )
             ),
@@ -306,7 +306,8 @@ function handleCheck(event, price) {
  */
 function handleAddToCart(index) {
     let price = parseFloat((document.getElementById('checkout-item-price').innerHTML).slice(1));
-    let menuItem = menuItems[index];
+    // find the menu item with specific id attribute
+    let menuItem = menuItems.find(obj => obj.id == index);
     let checkboxes = document.querySelectorAll('.addon-checkbox');
     let addons = [];
 

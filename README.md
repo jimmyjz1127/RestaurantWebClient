@@ -7,15 +7,15 @@
     - `Assets/`         : Images & icons 
     - `elements.js`     : Contains function for creating HTML nodes from javascript 
     - `main.html`       : webpage html 
+    - `mediaqueries.css`: contains all CSS media queries
     - `menu.js`         : contains javascript object array of menu items 
     - `presets.css`     : contains reusable CSS styling presets 
     - `script.js`       : primary script 
     - `styles.css`      : primary styling sheet
 
-## Attributions 
-Section contains sources for where I got my icons from 
+## Notes
+1. "TACO10" is the only valid discount code and applied a 10 percent discount.
+2. To remove an item from the order, you must decrement its quantity to zero
 
 
-| Icon File | Source URL | 
-|-----------|------------|
-|`Assets/appetizer-icon.png`| https://www.flaticon.com/free-icon/nachos_5401190?term=appetizer&page=1&position=6&origin=search&related_id=5401190|
+
