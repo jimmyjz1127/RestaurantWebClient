@@ -1,5 +1,5 @@
-# CS5103 Practical 1 : Chompify 
-## Author : 190015412
+# Chompify Reactive and Dynamic Online Site
+## Author : Jimmy Zhang (jimmyjz1127)
 ## Date : November 8, 2024
 
 ## Files & Directories 
